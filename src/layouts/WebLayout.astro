@@ -1,0 +1,75 @@
+---
+import AvBrand from "../AvBrand.astro";
+import AvFooter from "../AvFooter.astro";
+import AvNavbar from "../AvNavbar.astro";
+import AvNavbarActions from "../AvNavbarActions.astro";
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const {
+  title = "Ansiversa",
+  description = "Ansiversa – A unified ecosystem of premium Apps designed to feel simple, powerful, and delightful.",
+} = Astro.props;
+
+const user = Astro.locals.user;
+---
+
+
+
+<html lang="en" data-theme="dark">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="generator" content={Astro.generator} />
+
+    <title>{title}</title>
+    <meta name="description" content={description} />
+
+    <!-- Favicon (our new circular SVG) -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+
+    <!-- Theme colors -->
+    <meta name="theme-color" content="#020617" />
+    <meta name="color-scheme" content="dark" />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:site_name" content="Ansiversa" />
+    <meta property="og:url" content="https://ansiversa.com" />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+
+    <!-- Slot for page-specific head tags if needed later -->
+    <slot name="head" />
+  </head>
+
+  <body class="av-page">
+    <!-- Top Navigation -->
+    <AvNavbar>
+      <AvBrand />
+      <AvNavbarActions user={user} />
+    </AvNavbar>
+
+    <!-- Main content -->
+    <main class="av-main">
+      <slot />
+    </main>
+
+    <!-- Footer -->
+    <AvFooter
+      links={[
+        { label: "Terms", href: "/legal/terms" },
+        { label: "Privacy", href: "/legal/privacy" },
+        { label: "Contact", href: "/contact" }
+      ]}
+    />
+  </body>
+</html>
