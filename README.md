@@ -1,35 +1,26 @@
-# Astro Starter Kit: Component Package
+# 📦 @ansiversa/components
 
-This is a template for an Astro component library. Use this template for writing components to use in multiple projects or publish to NPM.
+Shared UI Components & Layouts for the **Ansiversa Ecosystem** — a collection of premium, consistent, reusable Astro components designed for all Ansiversa apps including **Web**, **Admin**, and all future **100+ Mini Apps**.
 
-```sh
-npm create astro@latest -- --template component
-```
+This package ensures that every app in the ecosystem uses the same styles, layouts, and interaction patterns for a unified experience.
 
-[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/withastro/astro/tree/latest/examples/non-html-pages)
-[![Open with CodeSandbox](https://assets.codesandbox.io/github/button-edit-lime.svg)](https://codesandbox.io/p/sandbox/github/withastro/astro/tree/latest/examples/non-html-pages)
-[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/withastro/astro?devcontainer_path=.devcontainer/component/devcontainer.json)
+---
 
-## 🚀 Project Structure
+## 🚀 Features
 
-Inside of your Astro project, you'll see the following folders and files:
+- ⚡️ Reusable Astro Components (Buttons, Cards, Inputs, Navbar, Footer)
+- 🧱 Shared Layouts (WebLayout, AuthLayout)
+- 🎨 Design-System Ready (works with Ansiversa global.css tokens)
+- 🌙 Fully compatible with light/dark mode
+- 🧩 Plug-and-play installation for any Ansiversa mini-app
+- 📦 Distributed as a clean NPM package
+- 🛠 Perfect for Astro projects with or without Alpine.js
 
-```text
-/
-├── index.ts
-├── src
-│   └── MyComponent.astro
-├── tsconfig.json
-├── package.json
-```
+---
 
-The `index.ts` file is the "entry point" for your package. Export your components in `index.ts` to make them importable from your package.
+## 📥 Installation
 
-## 🧞 Commands
+Inside any Ansiversa app (`web`, `admin`, or mini-apps):
 
-All commands are run from the root of the project, from a terminal:
-
-| Command       | Action                                                                                                                                                                                                                           |
-| :------------ | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `npm link`    | Registers this package locally. Run `npm link my-component-library` in an Astro project to install your components                                                                                                               |
-| `npm publish` | [Publishes](https://docs.npmjs.com/creating-and-publishing-unscoped-public-packages#publishing-unscoped-public-packages) this package to NPM. Requires you to be [logged in](https://docs.npmjs.com/cli/v8/commands/npm-adduser) |
+```bash
+npm install @ansiversa/components

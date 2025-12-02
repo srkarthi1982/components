@@ -1,0 +1,15 @@
+---
+interface Props {
+  /** Extra classes for the list wrapper */
+  className?: string;
+}
+
+const { className = "" } = Astro.props as Props;
+const classes = ["av-feature-list"];
+if (className) classes.push(className);
+const classAttr = classes.join(" ");
+---
+
+<div class={classAttr}>
+  <slot />
+</div>

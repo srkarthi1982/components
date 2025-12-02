@@ -1,0 +1,30 @@
+---
+interface Props {
+  /** Container size variant */
+  size?: "default" | "narrow" | "wide" | "full";
+
+  /** Extra classes */
+  className?: string;
+}
+
+const {
+  size = "default",
+  className = "",
+} = Astro.props;
+
+// Base
+const classes = ["av-container"];
+
+// Variants mapped to our custom classes from global.css
+if (size === "narrow") classes.push("av-container-narrow");
+if (size === "wide") classes.push("av-container-wide");
+if (size === "full") classes.push("av-container-full");
+
+if (className) classes.push(className);
+
+const classAttr = classes.join(" ");
+---
+
+<div class={classAttr}>
+  <slot />
+</div>

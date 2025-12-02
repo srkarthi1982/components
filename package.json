@@ -1,6 +1,7 @@
 {
-  "name": "components",
-  "version": "0.0.1",
+  "name": "@ansiversa/components",
+  "version": "0.0.5",
+  "description": "Shared UI components and layouts for the Ansiversa ecosystem",
   "type": "module",
   "exports": {
     ".": "./index.ts"

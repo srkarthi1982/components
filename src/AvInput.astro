@@ -1,0 +1,96 @@
+---
+interface Props {
+  label?: string;
+  name?: string;
+  placeholder?: string;
+  type?: astroHTML.JSX.HTMLInputTypeAttribute;
+  value?: string;
+  required?: boolean;
+  disabled?: boolean;
+  className?: string;
+  inputClass?: string;
+  id?: string;
+  hint?: string;
+  autocomplete?: string;
+}
+
+const props = Astro.props as Props;
+
+const {
+  label,
+  name,
+  placeholder = "",
+  type = "text",
+  value,
+  required = false,
+  disabled = false,
+  className = "",
+  inputClass = "",
+  id = name ?? `input-${Math.random().toString(36).slice(2)}`,
+  hint = "",
+  autocomplete,
+} = props;
+
+const wrapperClasses = ["av-form-group", "av-input-wrapper"];
+if (className) wrapperClasses.push(className);
+
+const inputClasses = ["av-input"];
+if (inputClass) inputClasses.push(inputClass);
+
+const isPassword = type === "password";
+---
+
+<div 
+  class={wrapperClasses.join(" ")} 
+  x-data={isPassword ? `{ show: false }` : undefined}
+>
+  {label && (
+    <label class="av-label" for={id}>
+      {label}
+      {required && <span aria-hidden="true"> *</span>}
+    </label>
+  )}
+
+  <div class="av-input-password-container">
+    <input
+      id={id}
+      name={name}
+      type={isPassword ? undefined : type}
+      :type={isPassword ? `(show ? 'text' : 'password')` : undefined}
+      class={inputClasses.join(" ")}
+      placeholder={placeholder}
+      value={value}
+      required={required}
+      disabled={disabled}
+      autocomplete={autocomplete}
+    />
+
+    <!-- PASSWORD TOGGLE BUTTON -->
+    {isPassword && (
+      <button 
+        type="button" 
+        class="av-password-toggle"
+        @click="show = !show"
+        :aria-label="show ? 'Hide password' : 'Show password'"
+      >
+        <template x-if="!show">
+          <svg xmlns="http://www.w3.org/2000/svg" class="av-password-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+            <path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7S1 12 1 12z"/>
+            <circle cx="12" cy="12" r="3"/>
+          </svg>
+        </template>
+
+        <template x-if="show">
+          <svg xmlns="http://www.w3.org/2000/svg" class="av-password-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+            <path d="M17.94 17.94A10.94 10.94 0 0 1 12 19c-7 0-11-7-11-7a21.77 21.77 0 0 1 5.06-5.94m3.07-1.6A10.94 10.94 0 0 1 12 5c7 0 11 7 11 7a21.77 21.77 0 0 1-2.25 3.2"/>
+            <line x1="1" y1="1" x2="23" y2="23"/>
+          </svg>
+        </template>
+      </button>
+    )}
+  </div>
+
+  {hint && (
+    <p class="av-form-hint">{hint}</p>
+  )}
+</div>

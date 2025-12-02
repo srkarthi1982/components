@@ -1,0 +1,56 @@
+---
+interface Props {
+  /** Checkbox label text (if no children slot is provided) */
+  label?: string;
+  /** Input name */
+  name?: string;
+  /** Input id */
+  id?: string;
+  /** Whether the checkbox is required */
+  required?: boolean;
+  /** Whether the checkbox is checked by default */
+  checked?: boolean;
+  /** Extra classes for the outer wrapper */
+  className?: string;
+  /** Optional hint text below the checkbox */
+  hint?: string;
+}
+
+const props = Astro.props as Props;
+
+const {
+  label,
+  name,
+  required = false,
+  checked = false,
+  className = "",
+  hint = "",
+} = props;
+
+const id = props.id ?? name ?? `checkbox-${Math.random().toString(36).slice(2)}`;
+
+const wrapperClasses: string[] = [];
+if (className) wrapperClasses.push(className);
+---
+
+<div class={wrapperClasses.join(" ")}>
+  <label class="av-inline-check" for={id}>
+    <input
+      id={id}
+      name={name}
+      type="checkbox"
+      class="av-checkbox"
+      required={required}
+      checked={checked}
+    />
+    <span>
+      {label ? label : <slot />}
+    </span>
+  </label>
+
+  {hint && (
+    <p class="av-form-hint">
+      {hint}
+    </p>
+  )}
+</div>

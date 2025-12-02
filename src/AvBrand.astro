@@ -1,0 +1,41 @@
+---
+interface Props {
+  /** Link destination (default: home) */
+  href?: string;
+
+  /** Title text — default ANSIVERSA */
+  title?: string;
+
+  /** Subtitle text — default Curated Apps */
+  subtitle?: string;
+
+  /** Path to the logo icon (default: /favicon.svg) */
+  logo?: string;
+
+  /** Extra classes if needed */
+  className?: string;
+}
+
+const {
+  href = "/",
+  title = "ANSIVERSA",
+  subtitle = "Curated Apps",
+  logo = "/favicon.svg",
+  className = "",
+} = Astro.props;
+
+const classes = ["av-navbar-brand"];
+if (className) classes.push(className);
+const classAttr = classes.join(" ");
+---
+
+<a href={href} class={classAttr}>
+  <div class="av-navbar-brand__logo">
+    <img src={logo} alt="Ansiversa logo" />
+  </div>
+
+  <div class="av-navbar-brand__meta">
+    <span class="av-navbar-brand__title av-gradient-text">{title}</span>
+    <span class="av-navbar-brand__subtitle">{subtitle}</span>
+  </div>
+</a>

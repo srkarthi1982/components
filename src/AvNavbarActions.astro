@@ -1,0 +1,168 @@
+---
+import AvButton from "./AvButton.astro";
+import { actions } from "astro:actions";
+
+interface NavLink {
+  label: string;
+  href: string;
+  variant?: "primary" | "ghost" | "outline";
+  className?: string;
+}
+
+interface User {
+  id: string;
+  email: string;
+  name?: string;
+}
+
+interface Props {
+  className?: string;
+  user?: User;
+}
+
+const { className = "", user } = Astro.props as Props;
+
+const classes = ["av-navbar-actions"];
+if (className) classes.push(className);
+const classAttr = classes.join(" ");
+
+const iconMap: Record<string, string> = {
+  Apps: `
+    <svg class="av-icon" viewBox='0 0 24 24'>
+      <rect x='3' y='3' width='7' height='7' rx='2'/>
+      <rect x='14' y='3' width='7' height='7' rx='2'/>
+      <rect x='3' y='14' width='7' height='7' rx='2'/>
+      <rect x='14' y='14' width='7' height='7' rx='2'/>
+    </svg>
+  `,
+  Pricing: `
+    <svg class="av-icon" viewBox='0 0 24 24'>
+      <path d='M6 3h7.586a2 2 0 0 1 1.414.586l4.414 4.414a2 2 0 0 1 0 2.828L13 18.242a2 2 0 0 1-2.828 0L3.586 11.657A2 2 0 0 1 3 10.243V6a3 3 0 0 1 3-3Z'/>
+      <path d='M9 6h.01'/>
+    </svg>
+  `,
+  About: `
+    <svg class="av-icon" viewBox='0 0 24 24'>
+      <circle cx='12' cy='8' r='3.25'/>
+      <path d='M6 19v-.5a5.5 5.5 0 0 1 11 0V19'/>
+      <path d='M12 12.5v2'/>
+    </svg>
+  `,
+  default: `
+    <svg class="av-icon" viewBox='0 0 24 24'>
+      <circle cx='12' cy='12' r='9'/>
+    </svg>
+  `,
+};
+
+function renderIcon(label: string) {
+  return iconMap[label] ?? iconMap.default;
+}
+
+// ALWAYS SHOW THESE LINKS
+const baseLinks: NavLink[] = [
+  { label: "Apps", href: "/apps" },
+  { label: "Pricing", href: "/pricing" },
+  { label: "About", href: "/about" },
+];
+
+// SIGN-IN link only for guests
+const authLink: NavLink = {
+  label: "Sign in",
+  href: "/login",
+  variant: "primary",
+};
+
+const userInitial =
+  (user?.name?.charAt(0) ?? user?.email?.charAt(0) ?? "?").toUpperCase();
+---
+
+<div class={classAttr}>
+  <!-- Left: Always visible -->
+  {baseLinks.map((item) => (
+    <AvButton
+      href={item.href}
+      variant="ghost"
+      className="av-nowrap"
+    >
+      <span class="av-nav-icon" set:html={renderIcon(item.label)}></span>
+      <span class="av-nav-label">{item.label}</span>
+    </AvButton>
+  ))}
+
+  <!-- Right: Sign-in OR User dropdown -->
+  {user ? (
+    <div class="av-user-menu-wrapper" x-data="{ open: false }">
+      <button
+        type="button"
+        class="av-user-avatar-button"
+        aria-label="Account menu"
+        aria-haspopup="menu"
+        x-on:click="open = !open"
+        x-bind:aria-expanded="open"
+      >
+        <span class="av-user-avatar-circle" aria-hidden="true">
+          {userInitial}
+        </span>
+        <span class="sr-only">Open user menu</span>
+      </button>
+
+      <div
+        x-show="open"
+        x-cloak
+        x-transition.origin.top.right
+        x-on:click.outside="open = false"
+        class="av-user-menu av-nav-user-menu"
+        role="menu"
+        aria-label="User menu"
+      >
+        <div class="av-user-menu-header">
+          <div class="av-user-menu-avatar">{userInitial}</div>
+          <div class="av-user-menu-meta">
+            <p class="av-user-menu-name">{user.name}</p>
+            <p class="av-user-menu-email">{user.email}</p>
+          </div>
+        </div>
+
+        <div class="av-user-menu-divider"></div>
+
+        <div class="av-nav-user-menu">
+          <a href="/dashboard" class="av-user-menu-item av-dropdown-item" role="menuitem">
+            <span>Dashboard</span>
+          </a>
+
+          <a
+            href="/change-password"
+            class="av-user-menu-item av-dropdown-item"
+            role="menuitem"
+          >
+            <span>Change password</span>
+          </a>
+
+          <a href="/settings" class="av-user-menu-item av-dropdown-item" role="menuitem">
+            <span>Settings</span>
+          </a>
+
+          <form method="POST" action="/signout">
+            <button
+              type="submit"
+              class="av-user-menu-item av-dropdown-item av-user-menu-item--danger"
+              role="menuitem"
+            >
+              <span>Sign out</span>
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+  ) : (
+    <AvButton
+      href={authLink.href}
+      variant={authLink.variant}
+      className="av-nowrap"
+    >
+      <span class="av-nav-icon" set:html={renderIcon(authLink.label)}></span>
+      <span class="av-nav-label">{authLink.label}</span>
+    </AvButton>
+  )}
+</div>

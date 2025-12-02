@@ -1,0 +1,20 @@
+---
+interface Props {
+  /** Extra classes for the header element */
+  className?: string;
+}
+
+const {
+  className = "",
+} = Astro.props;
+
+const classes = ["av-navbar"];
+if (className) classes.push(className);
+const classAttr = classes.join(" ");
+---
+
+<header class={classAttr}>
+  <div class="av-navbar-inner">
+    <slot />
+  </div>
+</header>

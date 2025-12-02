@@ -1,0 +1,48 @@
+---
+interface FooterLink {
+  label: string;
+  href: string;
+}
+
+interface Props {
+  /** List of footer navigation links */
+  links?: FooterLink[];
+
+  /** Footer tagline text */
+  tagline?: string;
+
+  /** Extra classes for the wrapper */
+  className?: string;
+}
+
+const {
+  links = [
+    { label: "Terms", href: "#terms" },
+    { label: "Privacy", href: "#privacy" },
+  ],
+  tagline = "Advanced Next-Gen Software Innovation and Versatility.",
+  className = "",
+} = Astro.props;
+
+const classes = ["av-footer"];
+if (className) classes.push(className);
+const classAttr = classes.join(" ");
+---
+
+<footer class={classAttr}>
+  <div class="av-footer-inner">
+    <p class="av-caption">
+      © {new Date().getFullYear()} Ansiversa. All rights reserved.
+    </p>
+
+    <div class="av-footer-meta">
+      {links.map((item) => (
+        <a href={item.href} class="av-nav-link">{item.label}</a>
+      ))}
+
+      <span class="av-footer-separator">•</span>
+
+      <span class="av-footer-quote">{tagline}</span>
+    </div>
+  </div>
+</footer>

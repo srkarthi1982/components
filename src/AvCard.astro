@@ -1,0 +1,38 @@
+---
+interface Props {
+  /** Visual style of the card */
+  variant?: "default" | "auth" | "soft";
+  /** Extra classes for the outer wrapper */
+  className?: string;
+}
+
+const {
+  variant = "default",
+  className = "",
+} = Astro.props as Props;
+
+const classes: string[] = [];
+
+// Base card class
+if (variant === "soft") {
+  classes.push("av-card-soft");
+} else {
+  // default and auth both use av-card base
+  classes.push("av-card");
+}
+
+// Auth-specific modifier
+if (variant === "auth") {
+  classes.push("av-card-auth");
+}
+
+if (className) {
+  classes.push(className);
+}
+
+const classAttr = classes.join(" ");
+---
+
+<div class={classAttr}>
+  <slot />
+</div>

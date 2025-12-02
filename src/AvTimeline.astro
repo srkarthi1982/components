@@ -1,0 +1,99 @@
+---
+export interface TimelineItem {
+  date: string;
+  title?: string;
+  body: string;
+}
+
+interface Props {
+  items: TimelineItem[];
+}
+
+const { items = [] } = Astro.props;
+---
+
+<div class="av-timeline">
+  {items.map((item, index) => (
+    <div
+      class={`av-timeline-row${
+        index === items.length - 1 ? " av-timeline-row--last" : ""
+      }`}
+    >
+      <div class="av-timeline-dot"></div>
+
+      <div class="av-timeline-content">
+        <h3 class="av-timeline-date">{item.date}</h3>
+        {item.title && <h4 class="av-timeline-title">{item.title}</h4>}
+        <p class="av-timeline-body">{item.body}</p>
+      </div>
+    </div>
+  ))}
+</div>
+
+<style>
+  .av-timeline {
+    margin-top: 2rem;
+    text-align: left; /* override parent center alignment */
+  }
+
+  .av-timeline-row {
+    position: relative;
+    padding-left: 2.2rem;
+    padding-bottom: 1.8rem;
+  }
+
+  /* Vertical line (per row, so it connects dot → next dot) */
+  .av-timeline-row::before {
+    content: "";
+    position: absolute;
+    left: 7px;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: var(--ans-border-subtle, rgba(148, 163, 184, 0.6));
+    border-radius: 999px;
+  }
+
+  /* Shorten the line on the last item so it ends nicely */
+  .av-timeline-row--last::before {
+    bottom: 0.9rem;
+  }
+
+  /* Dot sitting on the line */
+  .av-timeline-dot {
+    position: absolute;
+    left: 0;
+    top: 0.25rem;
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    background: var(--ans-primary, #6366f1);
+    border: 2px solid var(--ans-bg, #020617);
+    box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.35);
+    z-index: 1;
+  }
+
+  /* Text content */
+  .av-timeline-content {
+    position: relative;
+  }
+
+  .av-timeline-date {
+    margin: 0;
+    font-size: 1.05rem;
+    font-weight: 700;
+  }
+
+  .av-timeline-title {
+    margin: 0.15rem 0 0.4rem;
+    font-size: 0.98rem;
+    font-weight: 500;
+    opacity: 0.9;
+  }
+
+  .av-timeline-body {
+    margin: 0;
+    line-height: 1.6;
+    opacity: 0.88;
+  }
+</style>

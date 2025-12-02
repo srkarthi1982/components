@@ -1,0 +1,27 @@
+---
+interface Props {
+  /** Dot style */
+  variant?: "primary" | "secondary" | "default";
+  /** Extra classes for the item wrapper */
+  className?: string;
+}
+
+const {
+  variant = "default",
+  className = "",
+} = Astro.props as Props;
+
+const itemClasses = ["av-feature-item"];
+if (className) itemClasses.push(className);
+
+const dotClasses = ["av-feature-dot"];
+if (variant === "primary") dotClasses.push("av-feature-dot--primary");
+if (variant === "secondary") dotClasses.push("av-feature-dot--secondary");
+---
+
+<div class={itemClasses.join(" ")}>
+  <span class={dotClasses.join(" ")}></span>
+  <span>
+    <slot />
+  </span>
+</div>

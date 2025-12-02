@@ -1,0 +1,13 @@
+---
+interface Props {
+  /** Extra classes for customization */
+  className?: string;
+}
+
+const { className = "" } = Astro.props as Props;
+const classes = ["av-divider"];
+if (className) classes.push(className);
+const classAttr = classes.join(" ");
+---
+
+<div class={classAttr} />

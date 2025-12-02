@@ -1,0 +1,69 @@
+---
+interface Props {
+  /** visual style */
+  variant?: "primary" | "ghost" | "outline";
+  /** size */
+  size?: "sm" | "md" | "lg";
+  /** full width */
+  block?: boolean;
+  /** if set, renders as <a> instead of <button> */
+  href?: string;
+  /** button type when rendering <button> */
+  type?: "button" | "submit" | "reset";
+  /** disabled state (for <button>) */
+  disabled?: boolean;
+  /** extra classes if ever needed */
+  className?: string;
+}
+
+const {
+  variant = "primary",
+  size = "md",
+  block = false,
+  href,
+  type = "button",
+  disabled = false,
+  className,
+} = Astro.props;
+
+// Build class list based on our global.css system
+const classes: string[] = [];
+
+// Variant (each variant class already includes av-btn base via @apply)
+if (variant === "primary") {
+  classes.push("av-btn-primary");
+} else if (variant === "ghost") {
+  classes.push("av-btn-ghost");
+} else if (variant === "outline") {
+  classes.push("av-btn-outline");
+}
+
+// Size
+if (size === "sm") {
+  classes.push("av-btn-sm");
+} else if (size === "lg") {
+  classes.push("av-btn-lg");
+}
+
+// Block
+if (block) {
+  classes.push("av-btn-block");
+}
+
+// Extra classes (optional)
+if (className) {
+  classes.push(className);
+}
+
+const classAttr = classes.join(" ");
+---
+
+{href ? (
+  <a href={href} class={classAttr}>
+    <slot />
+  </a>
+) : (
+  <button type={type} class={classAttr} disabled={disabled}>
+    <slot />
+  </button>
+)}
