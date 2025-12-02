@@ -1,0 +1,166 @@
+---
+import AvButton from "../buttons/AvButton.astro";
+import AvButtonGroup from "../buttons/AvButtonGroup.astro";
+import AvIconButton from "../buttons/AvIconButton.astro";
+import AvHeader from "../navigation/AvHeader.astro";
+import AvInput from "../inputs/AvInput.astro";
+import AvTextarea from "../inputs/AvTextarea.astro";
+import AvSelect from "../inputs/AvSelect.astro";
+import AvCheckbox from "../inputs/AvCheckbox.astro";
+import type { ComponentDoc } from "../../data/componentDocs";
+
+export interface Props {
+  doc: ComponentDoc;
+}
+
+const { doc } = Astro.props;
+const isReady = doc.status === "ready";
+const demoType = doc.demo;
+---
+
+<article class="space-y-6">
+  <header class="space-y-2">
+    <div class="flex items-center gap-3">
+      <h2 class="text-2xl font-semibold">{doc.name}</h2>
+      <span
+        class={`rounded-full px-3 py-1 text-xs font-semibold ${
+          isReady
+            ? "bg-[var(--ans-primary)] text-[var(--ans-primary-foreground)]"
+            : "bg-[var(--ans-bg-muted)] text-[var(--ans-fg-muted)]"
+        }`}
+      >
+        {isReady ? "Ready" : "Planned"}
+      </span>
+    </div>
+    <p class="text-[var(--ans-fg-muted)]">{doc.description}</p>
+  </header>
+
+  <section class="rounded-[var(--ans-radius)] border border-[var(--ans-border)] bg-[var(--ans-bg)] p-6 shadow-sm">
+    {isReady && demoType === "header" ? (
+      <div class="rounded-[var(--ans-radius)] border border-[var(--ans-border)] overflow-hidden">
+        <AvHeader
+          navLinks={[
+            { label: "Overview", href: "#", current: true },
+            { label: "Components", href: "#components" },
+            { label: "Docs", href: "#docs" },
+            { label: "Blog", href: "#blog" },
+          ]}
+          primaryAction={{ label: "Login", href: "#login" }}
+          secondaryAction={{ label: "Register", href: "#register", variant: "outline" }}
+          navAlign="center"
+        />
+      </div>
+    ) : isReady && demoType === "button" ? (
+      <div class="flex flex-wrap gap-4">
+        <AvButton variant="solid" size="md">Save</AvButton>
+        <AvButton variant="outline" size="md">Cancel</AvButton>
+        <AvButton variant="soft" size="lg" fullWidth class="max-w-xs">Full width</AvButton>
+        <AvButton variant="ghost" size="sm">Ghost</AvButton>
+        <AvButton variant="link" size="sm">Link</AvButton>
+      </div>
+    ) : isReady && demoType === "iconButton" ? (
+      <div class="flex items-center gap-3">
+        <AvIconButton aria-label="Search" />
+        <AvIconButton variant="outline" aria-label="Notifications">
+          <svg
+            class="size-5"
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke-width="1.5"
+            stroke="currentColor"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M14.857 17.082a23.848 23.848 0 005.454-1.31A8.967 8.967 0 0118 9.75v-.7V9a6 6 0 10-12 0v.75a8.967 8.967 0 01-2.312 6.022 23.848 23.848 0 005.455 1.31m5.714 0a24.255 24.255 0 01-5.714 0m5.714 0a3 3 0 11-5.714 0"
+            />
+          </svg>
+        </AvIconButton>
+        <AvIconButton variant="ghost" aria-label="Settings">
+          <svg
+            class="size-5"
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke-width="1.5"
+            stroke="currentColor"
+          >
+            <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 6h3m-3 12h3m-7.5-6h12" />
+          </svg>
+        </AvIconButton>
+      </div>
+    ) : isReady && demoType === "buttonGroup" ? (
+      <div class="flex flex-col gap-4">
+        <AvButtonGroup
+          value="view"
+          items={[
+            { label: "View", value: "view" },
+            { label: "Edit", value: "edit" },
+            { label: "Delete", value: "delete" },
+          ]}
+        />
+        <p class="text-xs text-[var(--ans-fg-muted)]">
+          Change the active state by passing a different <code class="font-mono">value</code> prop.
+        </p>
+      </div>
+    ) : isReady && demoType === "input" ? (
+      <div class="space-y-4">
+        <AvInput id="Email" type="email" placeholder="you@example.com" />
+        <AvInput id="Search" size="lg" placeholder="Search..." />
+      </div>
+    ) : isReady && demoType === "textarea" ? (
+      <AvTextarea id="Notes" rows={5} placeholder="Add more detail..." />
+    ) : isReady && demoType === "select" ? (
+      <AvSelect id="Headline" placeholder="Select headliner">
+        <option value="jm">John Mayer</option>
+        <option value="srv">Stevie Ray Vaughan</option>
+        <option value="jh">Jimi Hendrix</option>
+      </AvSelect>
+    ) : isReady && demoType === "checkbox" ? (
+      <div class="space-y-3">
+        <AvCheckbox id="option-1" label="Option 1" />
+        <AvCheckbox id="option-2" label="Option 2" description="Additional context" />
+      </div>
+    ) : (
+      <p class="text-[var(--ans-fg-muted)]">
+        This component is still being prepared. Once implemented, live previews will render here.
+      </p>
+    )}
+  </section>
+
+  <section class="space-y-3">
+    <h3 class="text-lg font-semibold">Usage</h3>
+    <pre class="rounded-[var(--ans-radius)] bg-[var(--ans-bg-muted)] p-4 text-sm text-[var(--ans-fg)] overflow-x-auto">
+<code>{doc.usage ?? `<!-- Usage examples for ${doc.name} coming soon -->`}</code>
+    </pre>
+  </section>
+
+  <section class="space-y-3">
+    <h3 class="text-lg font-semibold">Props</h3>
+    {doc.props && doc.props.length ? (
+      <div class="overflow-x-auto rounded-[var(--ans-radius)] border border-[var(--ans-border)] bg-[var(--ans-bg)]">
+        <table class="min-w-full divide-y divide-[var(--ans-border)] text-left text-sm">
+          <thead class="bg-[var(--ans-bg-muted)] text-[var(--ans-fg)]">
+            <tr>
+              <th class="px-4 py-3 font-semibold">Prop</th>
+              <th class="px-4 py-3 font-semibold">Type</th>
+              <th class="px-4 py-3 font-semibold">Description</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-[var(--ans-border)] text-[var(--ans-fg-muted)]">
+            {doc.props.map((prop) => (
+              <tr>
+                <td class="px-4 py-3 font-mono text-[var(--ans-fg)]">{prop.name}</td>
+                <td class="px-4 py-3 font-mono text-xs text-[var(--ans-fg)]">{prop.type}</td>
+                <td class="px-4 py-3">{prop.description}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    ) : (
+      <p class="text-sm text-[var(--ans-fg-muted)]">Prop details coming soon.</p>
+    )}
+  </section>
+</article>

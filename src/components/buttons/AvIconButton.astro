@@ -1,0 +1,70 @@
+---
+import {
+  buttonBaseClass,
+  variantClasses,
+  type ButtonVariant,
+} from "./buttonStyles";
+
+const iconSizeClasses = {
+  sm: "p-1.5 text-xs",
+  md: "p-2 text-sm",
+  lg: "p-3 text-base",
+} as const;
+
+type IconButtonSize = keyof typeof iconSizeClasses;
+
+export interface Props {
+  as?: keyof HTMLElementTagNameMap;
+  class?: string;
+  variant?: ButtonVariant;
+  size?: IconButtonSize;
+  label?: string;
+  [key: string]: any;
+}
+
+const {
+  as: Tag = "button",
+  class: className = "",
+  variant = "solid",
+  size = "md",
+  label,
+  ...rest
+} = Astro.props as Props;
+
+const ariaLabel = (rest["aria-label"] as string | undefined) ?? label ?? undefined;
+
+const classes = [
+  buttonBaseClass,
+  "rounded-full aspect-square",
+  iconSizeClasses[size] ?? iconSizeClasses.md,
+  variantClasses[variant] ?? variantClasses.solid,
+  className,
+]
+  .filter(Boolean)
+  .join(" ");
+
+const finalProps = {
+  ...rest,
+  ...(ariaLabel ? { "aria-label": ariaLabel } : {}),
+};
+---
+
+<Tag {...finalProps} class={classes}>
+  {label && !ariaLabel ? <span class="sr-only">{label}</span> : null}
+  <slot>
+    <svg
+      class="size-4"
+      xmlns="http://www.w3.org/2000/svg"
+      fill="none"
+      viewBox="0 0 24 24"
+      stroke-width="1.5"
+      stroke="currentColor"
+    >
+      <path
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        d="M21 21l-5.197-5.197m0 0a7.5 7.5 0 10-10.607-10.607 7.5 7.5 0 0010.607 10.607z"
+      />
+    </svg>
+  </slot>
+</Tag>

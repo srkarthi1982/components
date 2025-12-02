@@ -1,0 +1,16 @@
+---
+import ComponentsLayout from "../layouts/ComponentsLayout.astro";
+import ComponentDocDetail from "../components/docs/ComponentDocDetail.astro";
+import { componentDocs } from "../data/componentDocs";
+
+const doc = componentDocs.find((entry) => entry.slug === "av-card-content");
+if (!doc) {
+  throw new Error("Component data missing: av-card-content");
+}
+
+const pageTitle = `${doc.name} — Ansiversa Components`;
+---
+
+<ComponentsLayout title={pageTitle}>
+  <ComponentDocDetail doc={doc} />
+</ComponentsLayout>

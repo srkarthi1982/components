@@ -1,0 +1,90 @@
+---
+import type { ButtonSize } from "./buttonStyles";
+
+interface GroupItem {
+  label: string;
+  value: string;
+  disabled?: boolean;
+}
+
+export interface Props {
+  as?: keyof HTMLElementTagNameMap;
+  class?: string;
+  items?: GroupItem[];
+  value?: string;
+  size?: ButtonSize;
+  [key: string]: any;
+}
+
+const {
+  as: Tag = "div",
+  class: className = "",
+  items = [],
+  value,
+  size = "md",
+  ...rest
+} = Astro.props as Props;
+
+const wrapperClasses = ["inline-flex", className].filter(Boolean).join(" ");
+const initialValue = value ?? items[0]?.value ?? "";
+
+const sizeTokens = {
+  sm: "px-3 py-1.5 text-sm",
+  md: "px-4 py-2 text-sm",
+  lg: "px-6 py-3 text-base",
+} as const;
+
+const getItemClasses = (index: number) => {
+  const isFirst = index === 0;
+  const isLast = index === items.length - 1;
+  const radiusClass =
+    items.length === 1
+      ? "rounded-[var(--ans-radius)]"
+      : [
+          isFirst ? "rounded-l-[var(--ans-radius)]" : "",
+          isLast ? "rounded-r-[var(--ans-radius)]" : "",
+        ]
+          .filter(Boolean)
+          .join(" ");
+
+  return [
+    "-ml-px first:ml-0",
+    radiusClass,
+    "border border-[var(--ans-border)] bg-[var(--ans-bg)] text-[var(--ans-fg)] font-medium transition-colors",
+    "hover:bg-[var(--ans-bg-muted)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--ans-ring)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--ans-bg)] focus:z-10",
+    "disabled:pointer-events-none disabled:opacity-40",
+    sizeTokens[size] ?? sizeTokens.md,
+  ]
+    .filter(Boolean)
+    .join(" ");
+};
+
+const getActiveClasses = (isActive: boolean) =>
+  isActive
+    ? "border-[var(--ans-primary)] bg-[var(--ans-primary)] text-[var(--ans-primary-foreground)] shadow-sm hover:bg-[var(--ans-primary)] hover:text-[var(--ans-primary-foreground)]"
+    : "";
+
+const activeClass = getActiveClasses(true);
+---
+
+<Tag
+  {...rest}
+  class={wrapperClasses}
+  role="group"
+  x-data={`{ activeValue: ${JSON.stringify(initialValue)} }`}
+>
+  {items.map((item, index) => (
+    <button
+      type="button"
+      class={getItemClasses(index)}
+      x-on:click={`activeValue = ${JSON.stringify(item.value)}`}
+      x-bind:class={`activeValue === ${JSON.stringify(item.value)} ? '${activeClass}' : ''`}
+      x-bind:aria-pressed={`activeValue === ${JSON.stringify(item.value)}`}
+      data-value={item.value}
+      disabled={item.disabled}
+    >
+      {item.label}
+    </button>
+  ))}
+  <slot />
+</Tag>

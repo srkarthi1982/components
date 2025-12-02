@@ -1,0 +1,31 @@
+---
+import { inputBaseClass, inputSizeClasses, invalidClasses } from "./inputStyles";
+
+export interface Props {
+  class?: string;
+  size?: keyof typeof inputSizeClasses;
+  invalid?: boolean;
+  rows?: number;
+  [key: string]: any;
+}
+
+const {
+  class: className = "",
+  size = "md",
+  invalid = false,
+  rows = 4,
+  ...rest
+} = Astro.props as Props;
+
+const classes = [
+  inputBaseClass,
+  inputSizeClasses[size] ?? inputSizeClasses.md,
+  "resize-none",
+  invalid ? invalidClasses : "",
+  className,
+]
+  .filter(Boolean)
+  .join(" ");
+---
+
+<textarea rows={rows} class={classes} {...rest}><slot /></textarea>

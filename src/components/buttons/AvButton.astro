@@ -1,0 +1,41 @@
+---
+import {
+  buttonBaseClass,
+  sizeClasses,
+  variantClasses,
+  type ButtonSize,
+  type ButtonVariant,
+} from "./buttonStyles";
+
+export interface Props {
+  as?: keyof HTMLElementTagNameMap;
+  class?: string;
+  variant?: ButtonVariant;
+  size?: ButtonSize;
+  fullWidth?: boolean;
+  [key: string]: any;
+}
+
+const {
+  as: Tag = "button",
+  class: className = "",
+  variant = "solid",
+  size = "md",
+  fullWidth = false,
+  ...rest
+} = Astro.props as Props;
+
+const classes = [
+  buttonBaseClass,
+  sizeClasses[size] ?? sizeClasses.md,
+  variantClasses[variant] ?? variantClasses.solid,
+  fullWidth ? "w-full" : "",
+  className,
+]
+  .filter(Boolean)
+  .join(" ");
+---
+
+<Tag {...rest} class={classes}>
+  <slot />
+</Tag>

@@ -1,0 +1,48 @@
+---
+import { inputBaseClass, inputSizeClasses, invalidClasses } from "./inputStyles";
+
+export interface Props {
+  class?: string;
+  size?: keyof typeof inputSizeClasses;
+  invalid?: boolean;
+  placeholder?: string;
+  [key: string]: any;
+}
+
+const {
+  class: className = "",
+  size = "md",
+  invalid = false,
+  placeholder,
+  ...rest
+} = Astro.props as Props;
+
+const classes = [
+  inputBaseClass,
+  inputSizeClasses[size] ?? inputSizeClasses.md,
+  "appearance-none pe-10",
+  invalid ? invalidClasses : "",
+  className,
+]
+  .filter(Boolean)
+  .join(" ");
+---
+
+<div class="relative">
+  <select class={classes} {...rest}>
+    {placeholder ? <option value="">{placeholder}</option> : null}
+    <slot />
+  </select>
+  <span class="pointer-events-none absolute inset-y-0 right-3 flex items-center text-[var(--ans-fg-muted)]">
+    <svg
+      class="size-4"
+      xmlns="http://www.w3.org/2000/svg"
+      fill="none"
+      viewBox="0 0 24 24"
+      stroke-width="1.5"
+      stroke="currentColor"
+    >
+      <path stroke-linecap="round" stroke-linejoin="round" d="m6 9 6 6 6-6" />
+    </svg>
+  </span>
+</div>

@@ -1,0 +1,35 @@
+---
+import "../styles/global.css";
+
+export interface Props {
+  title?: string;
+}
+
+const { title = "Ansiversa Components" } = Astro.props;
+const url = Astro.url;
+---
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="generator" content={Astro.generator} />
+    <title>{title}</title>
+  </head>
+  <body class="bg-[var(--ans-bg)] text-[var(--ans-fg)]">
+    <section id="overview" class="border-b border-[var(--ans-border)] bg-[var(--ans-bg)] px-4 py-12 text-center sm:px-6 lg:px-8">
+      <p class="text-xl font-semibold uppercase tracking-wide text-[var(--ans-fg-muted)]">
+        Ansiversa Component Library
+      </p>
+    </section>
+    <main id="components" class="mx-auto flex max-w-5xl flex-col gap-8 px-4 py-10 sm:px-6 lg:px-8">
+      {
+      url.pathname !== '/' && 
+      <a class="text-sm font-semibold text-[var(--ans-primary)] hover:underline" href="/">
+        &larr; Back to overview
+      </a>}
+      <slot />
+    </main>
+  </body>
+</html>
