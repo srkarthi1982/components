@@ -1,6 +1,5 @@
 ---
 import AvButton from "./AvButton.astro";
-import { actions } from "astro:actions";
 
 interface NavLink {
   label: string;
@@ -61,15 +60,15 @@ function renderIcon(label: string) {
 
 // ALWAYS SHOW THESE LINKS
 const baseLinks: NavLink[] = [
-  { label: "Apps", href: "/apps" },
-  { label: "Pricing", href: "/pricing" },
-  { label: "About", href: "/about" },
+  { label: "Apps", href: "https://www.ansiversa.com/apps" },
+  { label: "Pricing", href: "https://www.ansiversa.com/pricing" },
+  { label: "About", href: "https://www.ansiversa.com/about" },
 ];
 
 // SIGN-IN link only for guests
 const authLink: NavLink = {
   label: "Sign in",
-  href: "/login",
+  href: "https://www.ansiversa.com/login",
   variant: "primary",
 };
 
