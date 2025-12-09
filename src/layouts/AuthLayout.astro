@@ -11,9 +11,14 @@ const {
 
 const rawDomain = (import.meta.env.ANSIVERSA_COOKIE_DOMAIN || "ansiversa.com").trim();
 const normalizedDomain = rawDomain.replace(/^(https?:\/\/)/i, "").replace(/\/+$/, "");
-const ROOT_URL = rawDomain.startsWith("http")
+const protocol = rawDomain.match(/^https?:\/\//i)
+  ? undefined
+  : import.meta.env.PROD
+    ? "https"
+    : "http";
+const ROOT_URL = rawDomain.match(/^https?:\/\//i)
   ? rawDomain.replace(/\/+$/, "")
-  : `https://${normalizedDomain}`;
+  : `${protocol}://${normalizedDomain}`;
 ---
 
 
