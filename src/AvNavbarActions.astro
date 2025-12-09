@@ -25,6 +25,12 @@ const classes = ["av-navbar-actions"];
 if (className) classes.push(className);
 const classAttr = classes.join(" ");
 
+const rawDomain = (import.meta.env.ANSIVERSA_COOKIE_DOMAIN || "ansiversa.com").trim();
+const normalizedDomain = rawDomain.replace(/^(https?:\/\/)/i, "").replace(/\/+$/, "");
+const ROOT_URL = rawDomain.startsWith("http")
+  ? rawDomain.replace(/\/+$/, "")
+  : `https://${normalizedDomain}`;
+
 const iconMap: Record<string, string> = {
   Apps: `
     <svg class="av-icon" viewBox='0 0 24 24'>
@@ -60,15 +66,15 @@ function renderIcon(label: string) {
 
 // ALWAYS SHOW THESE LINKS
 const baseLinks: NavLink[] = [
-  { label: "Apps", href: "https://www.ansiversa.com/apps" },
-  { label: "Pricing", href: "https://www.ansiversa.com/pricing" },
-  { label: "About", href: "https://www.ansiversa.com/about" },
+  { label: "Apps", href: `${ROOT_URL}/apps` },
+  { label: "Pricing", href: `${ROOT_URL}/pricing` },
+  { label: "About", href: `${ROOT_URL}/about` },
 ];
 
 // SIGN-IN link only for guests
 const authLink: NavLink = {
   label: "Sign in",
-  href: "https://www.ansiversa.com/login",
+  href: `${ROOT_URL}/login`,
   variant: "primary",
 };
 
@@ -125,19 +131,19 @@ const userInitial =
         <div class="av-user-menu-divider"></div>
 
         <div class="av-nav-user-menu">
-          <a href="https://www.ansiversa.com/dashboard" class="av-user-menu-item av-dropdown-item" role="menuitem">
+          <a href={`${ROOT_URL}/dashboard`} class="av-user-menu-item av-dropdown-item" role="menuitem">
             <span>Dashboard</span>
           </a>
 
           <a
-            href="https://www.ansiversa.com/change-password"
+            href={`${ROOT_URL}/change-password`}
             class="av-user-menu-item av-dropdown-item"
             role="menuitem"
           >
             <span>Change password</span>
           </a>
 
-          <a href="https://www.ansiversa.com/settings" class="av-user-menu-item av-dropdown-item" role="menuitem">
+          <a href={`${ROOT_URL}/settings`} class="av-user-menu-item av-dropdown-item" role="menuitem">
             <span>Settings</span>
           </a>
 
@@ -151,7 +157,7 @@ const userInitial =
             </button>
           </form> */}
           <a
-              href="https://www.ansiversa.com/signout"
+              href={`${ROOT_URL}/signout`}
               class="av-user-menu-item av-dropdown-item av-user-menu-item--danger"
               role="menuitem"
             >

@@ -15,6 +15,12 @@ const {
 } = Astro.props;
 
 const user = Astro.locals.user;
+
+const rawDomain = (import.meta.env.ANSIVERSA_COOKIE_DOMAIN || "ansiversa.com").trim();
+const normalizedDomain = rawDomain.replace(/^(https?:\/\/)/i, "").replace(/\/+$/, "");
+const ROOT_URL = rawDomain.startsWith("http")
+  ? rawDomain.replace(/\/+$/, "")
+  : `https://${normalizedDomain}`;
 ---
 
 
@@ -40,7 +46,7 @@ const user = Astro.locals.user;
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:site_name" content="Ansiversa" />
-    <meta property="og:url" content="https://ansiversa.com" />
+    <meta property="og:url" content={ROOT_URL} />
 
     <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image" />
