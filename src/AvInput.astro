@@ -12,6 +12,7 @@ interface Props {
   id?: string;
   hint?: string;
   autocomplete?: string;
+  [attrs: string]: any;
 }
 
 const props = Astro.props as Props;
@@ -29,6 +30,7 @@ const {
   id = name ?? `input-${Math.random().toString(36).slice(2)}`,
   hint = "",
   autocomplete,
+  ...attrs 
 } = props;
 
 const wrapperClasses = ["av-form-group", "av-input-wrapper"];
@@ -63,6 +65,7 @@ const isPassword = type === "password";
       required={required}
       disabled={disabled}
       autocomplete={autocomplete}
+      {...attrs}
     />
 
     <!-- PASSWORD TOGGLE BUTTON -->

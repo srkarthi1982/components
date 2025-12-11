@@ -14,6 +14,9 @@ interface Props {
   className?: string;
   /** Optional hint text below the checkbox */
   hint?: string;
+
+  /** Additional HTML attributes */
+  [attrs: string]: any;
 }
 
 const props = Astro.props as Props;
@@ -25,6 +28,7 @@ const {
   checked = false,
   className = "",
   hint = "",
+  ...attrs
 } = props;
 
 const id = props.id ?? name ?? `checkbox-${Math.random().toString(36).slice(2)}`;
@@ -42,6 +46,7 @@ if (className) wrapperClasses.push(className);
       class="av-checkbox"
       required={required}
       checked={checked}
+      {...attrs}
     />
     <span>
       {label ? label : <slot />}

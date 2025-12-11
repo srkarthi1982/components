@@ -2,18 +2,22 @@
 interface Props {
   /** Extra classes for the header element */
   className?: string;
+
+  /** Additional HTML attributes */
+  [attrs: string]: any;
 }
 
 const {
   className = "",
-} = Astro.props;
+  ...attrs
+} = Astro.props as Props;
 
 const classes = ["av-navbar"];
 if (className) classes.push(className);
 const classAttr = classes.join(" ");
 ---
 
-<header class={classAttr}>
+<header class={classAttr} {...attrs}>
   <div class="av-navbar-inner">
     <slot />
   </div>

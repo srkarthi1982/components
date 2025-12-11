@@ -5,12 +5,16 @@ interface Props {
 
   /** Extra classes */
   className?: string;
+
+  /** Additional HTML attributes */
+  [attrs: string]: any;
 }
 
 const {
   size = "default",
   className = "",
-} = Astro.props;
+  ...attrs
+} = Astro.props as Props;
 
 // Base
 const classes = ["av-container"];
@@ -25,6 +29,6 @@ if (className) classes.push(className);
 const classAttr = classes.join(" ");
 ---
 
-<div class={classAttr}>
+<div class={classAttr} {...attrs}>
   <slot />
 </div>

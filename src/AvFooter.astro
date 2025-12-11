@@ -13,6 +13,9 @@ interface Props {
 
   /** Extra classes for the wrapper */
   className?: string;
+
+  /** Additional HTML attributes */
+  [attrs: string]: any;
 }
 
 const {
@@ -22,14 +25,15 @@ const {
   ],
   tagline = "Advanced Next-Gen Software Innovation and Versatility.",
   className = "",
-} = Astro.props;
+  ...attrs
+} = Astro.props as Props;
 
 const classes = ["av-footer"];
 if (className) classes.push(className);
 const classAttr = classes.join(" ");
 ---
 
-<footer class={classAttr}>
+<footer class={classAttr} {...attrs}>
   <div class="av-footer-inner">
     <p class="av-caption">
       © {new Date().getFullYear()} Ansiversa. All rights reserved.

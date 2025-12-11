@@ -17,9 +17,16 @@ interface User {
 interface Props {
   className?: string;
   user?: User;
+
+  /** Additional HTML attributes */
+  [attrs: string]: any;
 }
 
-const { className = "", user } = Astro.props as Props;
+const {
+  className = "",
+  user,
+  ...attrs
+} = Astro.props as Props;
 
 const classes = ["av-navbar-actions"];
 if (className) classes.push(className);
@@ -87,7 +94,7 @@ const userInitial =
   (user?.name?.charAt(0) ?? user?.email?.charAt(0) ?? "?").toUpperCase();
 ---
 
-<div class={classAttr}>
+<div class={classAttr} {...attrs}>
   <!-- Left: Always visible -->
   {baseLinks.map((item) => (
     <AvButton

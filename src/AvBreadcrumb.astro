@@ -1,0 +1,110 @@
+---
+import AvButton from "./AvButton.astro";
+import AvContainer from "./AvContainer.astro";
+
+interface Crumb {
+  label: string;
+  href?: string;
+}
+
+interface Props {
+  items: Crumb[];
+  className?: string;
+  [attr: string]: any; // allow extra attrs like x-data, x-ref, etc.
+}
+
+const {
+  items,
+  className = "",
+  ...attrs
+} = Astro.props as Props;
+
+const rootClasses = ["av-breadcrumb"];
+if (className) rootClasses.push(className);
+const rootClassAttr = rootClasses.join(" ");
+---
+
+<nav class={rootClassAttr} aria-label="Breadcrumb" {...attrs}>
+  <AvContainer className="av-breadcrumb__container">
+    <ol class="av-breadcrumb__list">
+      {items.map((item, index) => {
+        const isLast = index === items.length - 1;
+
+        return (
+          <li
+            class="av-breadcrumb__item"
+            aria-current={isLast ? "page" : undefined}
+          >
+            {item.href && !isLast ? (
+              <AvButton
+                href={item.href}
+                variant="ghost"
+                size="sm"
+                className="av-breadcrumb__link"
+              >
+                {item.label}
+              </AvButton>
+            ) : (
+              <span class={isLast ? "av-breadcrumb__current" : "av-breadcrumb__label"}>
+                {item.label}
+              </span>
+            )}
+
+            {!isLast && (
+              <span class="av-breadcrumb__separator" aria-hidden="true">
+                /
+              </span>
+            )}
+          </li>
+        );
+      })}
+    </ol>
+  </AvContainer>
+</nav>
+
+<style>
+  .av-breadcrumb {
+    width: 100%;
+  }
+
+  .av-breadcrumb__container {
+    /* Left aligned by default – container just gives padding/max-width */
+  }
+
+  .av-breadcrumb__list {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+    padding: 0;
+    margin: 0;
+    list-style: none;
+    font-size: var(--ans-font-size-caption, 0.8125rem);
+    color: var(--ans-muted-fg, #6b7280);
+  }
+
+  .av-breadcrumb__item {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.25rem;
+    white-space: nowrap;
+  }
+
+  .av-breadcrumb__link {
+    padding-inline: 0.5rem;
+    padding-block: 0.25rem;
+  }
+
+  .av-breadcrumb__label {
+    color: var(--ans-muted-fg, #6b7280);
+  }
+
+  .av-breadcrumb__current {
+    font-weight: 500;
+    color: var(--ans-fg, #111827);
+  }
+
+  .av-breadcrumb__separator {
+    margin-inline: 0.125rem;
+    color: var(--ans-border-subtle, #d1d5db);
+  }
+</style>

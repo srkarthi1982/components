@@ -4,11 +4,15 @@ interface Props {
   variant?: "primary" | "secondary" | "default";
   /** Extra classes for the item wrapper */
   className?: string;
+
+  /** Additional HTML attributes */
+  [attrs: string]: any;
 }
 
 const {
   variant = "default",
   className = "",
+  ...attrs
 } = Astro.props as Props;
 
 const itemClasses = ["av-feature-item"];
@@ -19,7 +23,7 @@ if (variant === "primary") dotClasses.push("av-feature-dot--primary");
 if (variant === "secondary") dotClasses.push("av-feature-dot--secondary");
 ---
 
-<div class={itemClasses.join(" ")}>
+<div class={itemClasses.join(" ")} {...attrs}>
   <span class={dotClasses.join(" ")}></span>
   <span>
     <slot />

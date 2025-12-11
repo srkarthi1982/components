@@ -14,6 +14,9 @@ interface Props {
 
   /** Extra classes if needed */
   className?: string;
+
+  /** Additional HTML attributes */
+  [attrs: string]: any;
 }
 
 const {
@@ -35,14 +38,15 @@ const {
   subtitle = "Curated Apps",
   logo = "/favicon.svg",
   className = "",
-} = Astro.props;
+  ...attrs
+} = Astro.props as Props;
 
 const classes = ["av-navbar-brand"];
 if (className) classes.push(className);
 const classAttr = classes.join(" ");
 ---
 
-<a href={href} class={classAttr}>
+<a href={href} class={classAttr} {...attrs}>
   <div class="av-navbar-brand__logo">
     <img src={logo} alt="Ansiversa logo" />
   </div>

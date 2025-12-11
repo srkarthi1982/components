@@ -4,11 +4,15 @@ interface Props {
   variant?: "default" | "auth" | "soft";
   /** Extra classes for the outer wrapper */
   className?: string;
+
+  /** Additional HTML attributes */
+  [attrs: string]: any;
 }
 
 const {
   variant = "default",
   className = "",
+  ...attrs
 } = Astro.props as Props;
 
 const classes: string[] = [];
@@ -33,6 +37,6 @@ if (className) {
 const classAttr = classes.join(" ");
 ---
 
-<div class={classAttr}>
+<div class={classAttr} {...attrs}>
   <slot />
 </div>

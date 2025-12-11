@@ -1,0 +1,35 @@
+---
+interface Props {
+  label?: string;
+  name?: string;
+  placeholder?: string;
+  rows?: number;
+  value?: string;
+  required?: boolean;
+
+  /** Additional HTML attributes */
+  [attrs: string]: any;
+}
+
+const {
+  label,
+  name,
+  placeholder,
+  rows = 4,
+  value,
+  required,
+  ...attrs
+} = Astro.props as Props;
+---
+
+<div class="av-field">
+  {label ? <label class="av-field__label">{label}</label> : null}
+  <textarea
+    class="av-textarea"
+    placeholder={placeholder}
+    rows={rows}
+    name={name}
+    required={required}
+    {...attrs}
+  >{value}</textarea>
+</div>
