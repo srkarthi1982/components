@@ -17,7 +17,20 @@ interface Props {
 }
 
 const {
-  href = "/",
+  href = (() => {
+    const rawDomain = (import.meta.env.ANSIVERSA_COOKIE_DOMAIN || "ansiversa.com").trim();
+    const normalizedDomain = rawDomain.replace(/^(https?:\/\/)/i, "").replace(/\/+$/, "");
+    const protocol = rawDomain.match(/^https?:\/\//i)
+      ? undefined
+      : import.meta.env.PROD
+        ? "https"
+        : "http";
+    const ROOT_URL = rawDomain.match(/^https?:\/\//i)
+      ? rawDomain.replace(/\/+$/, "")
+      : `${protocol}://${normalizedDomain}`;
+
+    return ROOT_URL;
+  })(),
   title = "ANSIVERSA",
   subtitle = "Curated Apps",
   logo = "/favicon.svg",
