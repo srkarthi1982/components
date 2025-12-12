@@ -1107,6 +1107,42 @@
   stroke-width: 1.75;
 }
 
+/* Grid utility */
+.av-card-grid {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+}
+/* Status pill utility */
+.av-status-pill {
+  padding: 0.25rem 0.6rem;
+  border-radius: 999px;
+  background: rgba(148, 163, 184, 0.15);
+  color: var(--av-fg, #e2e8f0);
+  font-size: 0.85rem;
+  white-space: nowrap;
+}
+
+.av-status-pill--primary {
+  background: rgba(34, 211, 238, 0.18);
+  color: var(--av-fg, #e2e8f0);
+}
+
+/* Loading bar utility */
+.av-loading-bar {
+  height: 4px;
+  width: 100%;
+  background: linear-gradient(90deg, #22d3ee, #6366f1);
+  animation: av-shimmer 1.6s linear infinite;
+  margin-bottom: 1rem;
+  background-size: 200% 100%;
+}
+
+@keyframes av-shimmer {
+  0% { background-position: 0 0; }
+  100% { background-position: 200% 0; }
+}
+
 }
 
 
