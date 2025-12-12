@@ -5,15 +5,14 @@
   "type": "module",
   "exports": {
     ".": "./index.ts",
+    "./alpine": "./src/alpine/index.ts",
     "./styles/global.css": "./src/styles/global.css"
   },
   "files": [
     "src",
     "index.ts"
   ],
-  "keywords": [
-    "astro-component"
-  ],
+  "keywords": ["astro-component"],
   "scripts": {},
   "devDependencies": {
     "astro": "^5.16.3"

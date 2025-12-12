@@ -25,3 +25,4 @@ export { default as AvChipList } from './src/AvChipList.astro';
 export { default as AvTemplateCard } from './src/AvTemplateCard.astro';
 export { default as AvTemplateGrid } from './src/AvTemplateGrid.astro';
 export { default as AvDrawer } from './src/AvDrawer.astro';
+export * from "./src/alpine";
