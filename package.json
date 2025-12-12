@@ -1,6 +1,6 @@
 {
   "name": "@ansiversa/components",
-  "version": "0.0.19",
+  "version": "0.0.20",
   "description": "Shared UI components and layouts for the Ansiversa ecosystem",
   "type": "module",
   "exports": {
@@ -12,7 +12,9 @@
     "src",
     "index.ts"
   ],
-  "keywords": ["astro-component"],
+  "keywords": [
+    "astro-component"
+  ],
   "scripts": {},
   "devDependencies": {
     "astro": "^5.16.3"
