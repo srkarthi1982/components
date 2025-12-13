@@ -407,6 +407,16 @@
     @apply w-full justify-center;
   }
 
+  .av-btn-primary:disabled,
+  .av-btn-ghost:disabled,
+  .av-btn-outline:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    pointer-events: none;
+    transform: none;
+    box-shadow: none;
+  }
+
   /* Forms ------------------------------------------------- */
 
   .av-form-group {
