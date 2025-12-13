@@ -1003,6 +1003,11 @@
     @apply whitespace-nowrap;
   }
 
+  .av-stack {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
   /* --- USER AVATAR BUTTON --- */
 .av-user-avatar-button {
   position: relative;
@@ -1054,6 +1059,45 @@
   transform: scale(0.7);
   transition: all 0.35s ease;
   pointer-events: none;
+}
+
+/* AvPageHeader */
+.av-page-header__top {
+  display: flex;
+  flex-direction: column;   /* mobile: stacked */
+  align-items: flex-start;
+  gap: 0.75rem;
+}
+
+.av-page-header__actions {
+  display: flex;
+  flex-direction: column;   /* mobile: buttons one-per-row */
+  gap: 0.5rem;
+  width: 100%;              /* mobile: full width so buttons align nicely */
+}
+
+.av-page-header__actions .av-btn {
+  width: 100%;              /* mobile: full-width buttons */
+}
+
+/* Desktop */
+@media (min-width: 640px) {
+  .av-page-header__top {
+    flex-direction: row;    /* desktop: title left, actions right */
+    align-items: flex-start;
+    justify-content: space-between;
+  }
+
+  .av-page-header__actions {
+    flex-direction: row;    /* desktop: inline actions */
+    width: auto;
+    justify-content: flex-end;
+    flex-wrap: wrap;
+  }
+
+  .av-page-header__actions .av-btn {
+    width: auto;
+  }
 }
 
 /* Hover state */

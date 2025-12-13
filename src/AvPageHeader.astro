@@ -2,10 +2,12 @@
 import AvButton from "./AvButton.astro";
 import AvContainer from "./AvContainer.astro";
 
+type ButtonVariant = "primary" | "ghost" | "outline";
+
 interface Action {
   label: string;
   href: string;
-  variant?: string;
+  variant?: ButtonVariant;
 }
 
 interface Props {
@@ -21,22 +23,26 @@ const { title, description, primaryAction, secondaryAction } = Astro.props as Pr
 <section class="av-page-header">
   <AvContainer className="av-page-header__container">
     <div class="av-page-header__body">
-      <h1 class="av-page-header__title">{title}</h1>
+      <div class="av-page-header__top">
+        <h1 class="av-page-header__title">{title}</h1>
+
+        {(primaryAction || secondaryAction) && (
+          <div class="av-page-header__actions">
+            {primaryAction && (
+              <AvButton href={primaryAction.href} variant={primaryAction.variant ?? "primary"}>
+                {primaryAction.label}
+              </AvButton>
+            )}
+            {secondaryAction && (
+              <AvButton href={secondaryAction.href} variant={secondaryAction.variant ?? "ghost"}>
+                {secondaryAction.label}
+              </AvButton>
+            )}
+          </div>
+        )}
+      </div>
+
       {description && <p class="av-page-header__description">{description}</p>}
-      {(primaryAction || secondaryAction) && (
-        <div class="av-page-header__actions">
-          {primaryAction && (
-            <AvButton href={primaryAction.href} variant={primaryAction.variant ?? "primary"}>
-              {primaryAction.label}
-            </AvButton>
-          )}
-          {secondaryAction && (
-            <AvButton href={secondaryAction.href} variant={secondaryAction.variant ?? "ghost"}>
-              {secondaryAction.label}
-            </AvButton>
-          )}
-        </div>
-      )}
     </div>
   </AvContainer>
 </section>
