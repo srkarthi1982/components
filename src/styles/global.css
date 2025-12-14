@@ -246,6 +246,10 @@
     @apply text-[0.65rem] text-slate-400 uppercase tracking-[0.18em];
   }
 
+.av-gradient-text {
+  @apply bg-gradient-to-r from-cyan-300 via-cyan-200 to-purple-300 bg-clip-text text-transparent;
+}
+
   .av-navbar-actions {
     @apply flex items-center gap-2;
   }
@@ -364,6 +368,40 @@
     @apply text-sm text-slate-300;
   }
 
+/* Templates (grid + card) ------------------------------ */
+
+.av-template-grid {
+  @apply w-full;
+}
+
+.av-template-grid__items {
+  @apply grid gap-5 md:gap-6 sm:grid-cols-2 lg:grid-cols-3;
+}
+
+.av-template-card {
+  @apply rounded-2xl border border-slate-800/70 bg-slate-950/80 p-5 shadow-xl backdrop-blur-xl flex flex-col gap-3;
+}
+
+.av-template-card__header {
+  @apply flex items-start justify-between gap-3;
+}
+
+.av-template-card__name {
+  @apply text-sm font-semibold text-slate-100;
+}
+
+.av-template-card__accent {
+  @apply h-2 w-2 rounded-full bg-cyan-400/80;
+}
+
+.av-template-card__description {
+  @apply text-sm text-slate-400;
+}
+
+.av-template-card__actions {
+  @apply mt-1 flex items-center gap-2 flex-wrap;
+}
+
   /* Buttons ---------------------------------------------- */
 
   .av-btn {
@@ -462,6 +500,25 @@
     @apply text-xs text-slate-400;
   }
 
+/* Form field helpers (labels / wrappers) --------------- */
+
+.av-field {
+  @apply space-y-1.5;
+}
+
+.av-field__label,
+.av-input-label {
+  @apply text-xs font-medium text-slate-300;
+}
+
+.av-input-required {
+  @apply text-rose-300;
+}
+
+.av-input-select-wrapper {
+  @apply relative;
+}
+
   /* Navbar / Nav ----------------------------------------- */
 
   .av-navbar {
@@ -502,6 +559,58 @@
     @apply inline-flex items-center rounded-full border border-slate-700/50 bg-slate-900/70 px-2.5 py-0.5 text-[0.7rem] text-slate-300;
   }
 
+/* Feature / Item lists --------------------------------- */
+
+.av-feature-list {
+  @apply space-y-3;
+}
+
+.av-feature-item {
+  @apply flex items-start gap-3;
+}
+
+.av-feature-dot {
+  @apply mt-1.5 h-2 w-2 rounded-full bg-slate-600;
+}
+
+.av-feature-dot--primary {
+  @apply bg-cyan-400;
+}
+
+.av-feature-dot--secondary {
+  @apply bg-purple-400;
+}
+
+.av-item-list {
+  @apply divide-y divide-slate-800/60;
+}
+
+.av-item-list__item {
+  @apply py-4 flex flex-col gap-1;
+}
+
+.av-item-list__title {
+  @apply text-sm font-semibold text-slate-100;
+}
+
+.av-item-list__subtitle {
+  @apply text-xs text-slate-400;
+}
+
+.av-item-list__meta {
+  @apply text-[0.75rem] text-slate-500;
+}
+
+/* Chip list -------------------------------------------- */
+
+.av-chip-list {
+  @apply flex flex-wrap items-center gap-2;
+}
+
+.av-chip-list__chip {
+  @apply inline-flex items-center rounded-full border border-slate-700/70 bg-slate-900/80 px-2.5 py-0.5 text-[0.7rem] text-slate-300;
+}
+
   /* Alerts ----------------------------------------------- */
 
   .av-alert {
@@ -523,6 +632,24 @@
   .av-alert-danger {
     @apply rounded-lg border px-3.5 py-2.5 text-xs md:text-sm flex items-start gap-3 border-rose-500/60 bg-rose-500/10 text-rose-50;
   }
+
+/* Empty state ------------------------------------------ */
+
+.av-empty-state {
+  @apply rounded-2xl border border-slate-800/70 bg-slate-950/80 p-6 md:p-7 shadow-xl backdrop-blur-xl;
+}
+
+.av-empty-state__body {
+  @apply flex flex-col items-center text-center gap-3 max-w-xl mx-auto;
+}
+
+.av-empty-state__title {
+  @apply text-base md:text-lg font-semibold text-slate-100;
+}
+
+.av-empty-state__description {
+  @apply text-sm text-slate-400;
+}
 
   /* Tables ----------------------------------------------- */
 
@@ -610,6 +737,10 @@
   .av-footer-quote {
     @apply text-[0.78rem] text-slate-500 hidden sm:inline;
   }
+
+.av-caption {
+  @apply text-[0.78rem] text-slate-500;
+}
 
   /* User menu / avatar ----------------------------------- */
 
@@ -745,6 +876,36 @@
     height: 20px;
     stroke-width: 1.75;
   }
+
+/* Toolbar ---------------------------------------------- */
+
+.av-toolbar {
+  @apply border-b border-slate-800/60 bg-slate-950/40 backdrop-blur-xl;
+}
+
+.av-toolbar__container {
+  @apply w-full max-w-5xl mx-auto px-5 py-4 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between;
+}
+
+.av-toolbar__meta {
+  @apply flex flex-col gap-1;
+}
+
+.av-toolbar__actions {
+  @apply flex items-center gap-2 flex-wrap;
+}
+
+.av-toolbar__status {
+  @apply inline-flex items-center gap-2 text-xs text-slate-400;
+}
+
+.av-toolbar__status-dot {
+  @apply h-2 w-2 rounded-full bg-slate-600;
+}
+
+.av-toolbar__status-text {
+  @apply text-xs text-slate-400;
+}
 
   /* AvPageHeader (NEW) ----------------------------------- */
 
