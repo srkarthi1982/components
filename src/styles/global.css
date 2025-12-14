@@ -847,7 +847,7 @@
 }
 
 .av-auth-brand--center {
-  @apply justify-center;
+  @apply w-full flex justify-center;
 }
 
 .av-auth-back__button-row {
