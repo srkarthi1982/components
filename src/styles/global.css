@@ -652,7 +652,7 @@
   }
 
   .av-navbar-inner {
-    @apply w-full max-w-5xl mx-auto flex items-center justify-between py-3 gap-4;
+    @apply w-full max-w-5xl mx-auto px-1 flex items-center justify-between py-3 gap-4;
   }
 
   .av-nav {
