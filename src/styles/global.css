@@ -272,6 +272,76 @@
 
   /* Hero / Sections -------------------------------------- */
 
+/* Web page helpers (hero / sections) --------------------- */
+
+.av-kicker {
+  @apply inline-flex items-center gap-2 rounded-full border border-slate-700/70 bg-slate-900/70 px-3 py-1 text-[0.7rem] uppercase tracking-[0.16em] text-slate-300;
+}
+
+.av-hero-lead {
+  @apply mt-4 text-base sm:text-lg text-slate-300 max-w-2xl;
+}
+
+.av-section-stack {
+  @apply space-y-10 md:space-y-12;
+}
+
+.av-row {
+  @apply flex items-center gap-3;
+}
+
+.av-row-wrap {
+  @apply flex items-center gap-3 flex-wrap;
+}
+
+.av-col-4 {
+  @apply grid gap-4 sm:grid-cols-2 lg:grid-cols-4;
+}
+
+.av-list {
+  @apply space-y-2 text-sm text-slate-300;
+}
+
+.av-list > li {
+  @apply flex items-start gap-2;
+}
+
+.av-muted-link {
+  @apply text-slate-400 hover:text-slate-200 underline decoration-slate-700/60 hover:decoration-slate-400/60 underline-offset-4 transition-colors;
+}
+
+.av-quote {
+  @apply my-4 rounded-2xl border border-slate-800/70 bg-slate-950/60 p-4 text-sm italic text-slate-300;
+}
+
+.av-search {
+  @apply w-full rounded-2xl border border-slate-800/70 bg-slate-950/60 px-4 py-3 shadow-xl backdrop-blur-xl;
+}
+
+.av-steps--compact .av-steps-list {
+  @apply gap-3;
+}
+
+/* About / Founder --------------------------------------- */
+
+.av-founder-layout {
+  @apply mt-6 grid gap-6 lg:grid-cols-[220px_1fr] items-start;
+}
+
+.av-founder-photo-wrap {
+  @apply rounded-2xl border border-slate-800/70 bg-slate-950/60 p-3 shadow-xl backdrop-blur-xl;
+}
+
+.av-founder-photo {
+  @apply w-full h-auto rounded-xl object-cover;
+}
+
+.av-founder-copy {
+  @apply text-sm text-slate-300 space-y-4;
+}
+
+
+
   .av-hero {
     @apply py-16 md:py-24;
   }
@@ -319,6 +389,49 @@
   .av-section-grid {
     @apply grid gap-5 md:gap-6 md:grid-cols-3;
   }
+
+/* Pricing ------------------------------------------------ */
+
+.av-pricing-grid {
+  @apply grid gap-5 md:gap-6 lg:grid-cols-3 items-stretch;
+}
+
+.av-pricing-grid .av-card {
+  @apply h-full;
+}
+
+.av-pricing-table-wrapper {
+  @apply mt-6 overflow-x-auto rounded-2xl border border-slate-800/70 bg-slate-950/60 shadow-xl backdrop-blur-xl;
+}
+
+.av-pricing-table {
+  @apply w-full min-w-[860px] border-collapse text-left text-sm text-slate-300;
+}
+
+.av-pricing-table thead {
+  @apply text-xs uppercase tracking-[0.12em] text-slate-500;
+}
+
+.av-pricing-table thead tr {
+  @apply border-b border-slate-800;
+}
+
+.av-pricing-table th,
+.av-pricing-table td {
+  @apply px-4 py-3 align-top;
+}
+
+.av-pricing-table tbody tr {
+  @apply border-b border-slate-900/80;
+}
+
+.av-pricing-table tbody tr:hover {
+  @apply bg-slate-900/50;
+}
+
+.av-pricing-chip {
+  @apply inline-flex items-center rounded-full border border-slate-700/70 bg-slate-900/80 px-2.5 py-0.5 text-[0.7rem] text-slate-200;
+}
 
   /* Steps / Timeline-ish --------------------------------- */
 
@@ -456,6 +569,12 @@
   }
 
   /* Forms ------------------------------------------------- */
+
+.av-text-error {
+  @apply text-xs text-rose-300;
+}
+
+
 
   .av-form-group {
     @apply space-y-1.5;
@@ -715,6 +834,64 @@
   .av-auth-grid {
     @apply grid gap-3 sm:grid-cols-2;
   }
+
+.av-auth-brand {
+  @apply inline-flex;
+}
+
+.av-auth-brand--center {
+  @apply justify-center;
+}
+
+.av-auth-back__button-row {
+  @apply flex items-center justify-center gap-2 flex-wrap;
+}
+
+/* Signout page ------------------------------------------ */
+
+.av-auth-signout {
+  @apply max-w-md w-full mx-auto;
+}
+
+.av-auth-signout__card {
+  @apply p-6 md:p-7;
+}
+
+.av-auth-signout__badge {
+  @apply inline-flex items-center justify-center gap-2 rounded-full border border-slate-700/70 bg-slate-900/70 px-3 py-1 text-[0.75rem] text-slate-200;
+}
+
+.av-auth-signout__heading {
+  @apply text-lg font-semibold text-slate-100;
+}
+
+.av-auth-signout__copy {
+  @apply text-sm text-slate-400;
+}
+
+.av-auth-signout__status-grid {
+  @apply mt-3 grid gap-3;
+}
+
+.av-auth-signout__status-card {
+  @apply rounded-2xl border border-slate-800/70 bg-slate-950/60 p-3.5 flex items-start gap-3;
+}
+
+.av-auth-signout__status-indicator {
+  @apply mt-1 h-2 w-2 rounded-full bg-emerald-400/80 flex-none;
+}
+
+.av-auth-signout__status-title {
+  @apply block text-sm font-semibold text-slate-200;
+}
+
+.av-auth-signout__status-description {
+  @apply block text-xs text-slate-400;
+}
+
+.av-auth-signout__footer {
+  @apply mt-4 text-xs text-slate-500 text-center;
+}
 
   /* Footer ----------------------------------------------- */
 
