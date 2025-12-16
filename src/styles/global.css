@@ -1158,6 +1158,14 @@
    ========================================= */
 
 @layer utilities {
+
+.av-h-full {
+  height: 100%;
+}
+
+.av-w-full {
+  width: 100%;
+}
   .av-shadow-soft { box-shadow: var(--av-shadow-soft); }
   .av-shadow-glow { box-shadow: var(--av-shadow-glow); }
 
@@ -1212,6 +1220,7 @@
     margin-bottom: 1rem;
     background-size: 200% 100%;
   }
+
 
   @keyframes av-shimmer {
     0% { background-position: 0 0; }
