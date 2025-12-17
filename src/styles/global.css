@@ -196,6 +196,20 @@
 @layer components {
   /* Layout ------------------------------------------------ */
 
+  /* FAQ */
+  .av-faq-summary {
+    display: flex;
+    align-items: center;
+    gap: var(--av-space-sm);
+    cursor: pointer;
+    list-style: none;
+  }
+
+  /* Remove default arrow */
+  .av-faq-summary::-webkit-details-marker {
+    display: none;
+  }
+
   .av-page {
     @apply min-h-screen flex flex-col;
   }
