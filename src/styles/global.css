@@ -210,6 +210,24 @@
     display: none;
   }
 
+  /* Optional arrow icon */
+  .av-faq-summary::before {
+    content: "›";
+    transform: rotate(0deg);
+    transition: transform 0.2s ease;
+  }
+
+  details[open] .av-faq-summary::before {
+    transform: rotate(90deg);
+  }
+
+  .av-faq-question {
+    flex: 1;
+    font-weight: 700;
+    font-size: 1.05rem;
+    line-height: 1.4;
+  }
+
   .av-page {
     @apply min-h-screen flex flex-col;
   }
