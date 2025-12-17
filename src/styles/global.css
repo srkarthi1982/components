@@ -203,6 +203,7 @@
     gap: var(--av-space-sm);
     cursor: pointer;
     list-style: none;
+    flex-wrap: wrap;
   }
 
   /* Remove default arrow */
@@ -225,10 +226,18 @@
   }
 
   .av-faq-question {
-    flex: 1;
+    flex: 1 1 240px;
     font-weight: 700;
     font-size: 1.05rem;
     line-height: 1.4;
+  }
+
+  .av-faq-actions {
+    flex: 1 1 100%;
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+    justify-content: flex-start;
   }
 
   .av-page {
