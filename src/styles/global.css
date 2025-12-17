@@ -213,6 +213,9 @@
   /* Optional arrow icon */
   .av-faq-summary::before {
     content: "›";
+    font-size: 1.1rem;
+    line-height: 1;
+    margin-right: var(--av-space-xs);
     transform: rotate(0deg);
     transition: transform 0.2s ease;
   }
