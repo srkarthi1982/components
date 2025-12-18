@@ -629,6 +629,56 @@
     box-shadow: none;
   }
 
+  /* Confirm Dialog --------------------------------------- */
+
+  .av-dialog {
+    @apply fixed m-0 w-[min(640px,92vw)] border-0 bg-transparent p-0 text-slate-100 inset-0;
+  }
+
+  .av-dialog[open] {
+    @apply grid place-items-center;
+  }
+
+  .av-dialog::backdrop {
+    @apply bg-slate-950/80 backdrop-blur-sm;
+  }
+
+  .av-dialog__panel {
+    @apply w-full rounded-2xl border border-slate-800/70 bg-slate-950/90 p-6 shadow-2xl flex flex-col gap-5;
+  }
+
+  .av-dialog__header {
+    @apply space-y-2;
+  }
+
+  .av-dialog__title {
+    @apply text-lg font-semibold text-slate-100;
+  }
+
+  .av-dialog__desc {
+    @apply text-sm leading-relaxed text-slate-400;
+  }
+
+  .av-dialog__footer {
+    @apply mt-1 flex items-center justify-end gap-3;
+  }
+
+  .av-dialog--danger .av-dialog__panel {
+    @apply border-rose-500/50 shadow-[0_20px_40px_rgba(244,63,94,0.25)];
+  }
+
+  .av-dialog--danger .av-dialog__title {
+    @apply text-rose-100;
+  }
+
+  .av-dialog__confirm--danger {
+    @apply border-rose-400/80 bg-rose-500/70 text-rose-50 shadow-[0_0_30px_rgba(244,63,94,0.35)];
+  }
+
+  .av-dialog__confirm--danger:hover {
+    @apply bg-rose-500/80 border-rose-200;
+  }
+
   /* Forms ------------------------------------------------- */
 
 .av-text-error {

@@ -1,0 +1,129 @@
+---
+import AvButton from "./AvButton.astro";
+
+interface Props {
+  id: string;
+  title?: string;
+  description?: string;
+  confirmLabel?: string;
+  cancelLabel?: string;
+  variant?: "default" | "danger";
+  busy?: boolean;
+  className?: string;
+}
+
+const {
+  id,
+  title = "Confirm",
+  description,
+  confirmLabel = "Confirm",
+  cancelLabel = "Cancel",
+  variant = "default",
+  busy = false,
+  className = "",
+} = Astro.props as Props;
+
+const labelId = `${id}-title`;
+const descId = description ? `${id}-desc` : undefined;
+const dialogClass = `av-dialog av-dialog--${variant} ${className}`.trim();
+const dialogIdLiteral = JSON.stringify(id);
+---
+
+<dialog
+  id={id}
+  class={dialogClass}
+  aria-modal="true"
+  aria-labelledby={labelId}
+  aria-describedby={description ? descId : undefined}
+>
+  <div class="av-dialog__panel" role="document">
+    <div class="av-dialog__header">
+      <h2 class="av-dialog__title" id={labelId}>{title}</h2>
+      {description ? <p class="av-dialog__desc" id={descId}>{description}</p> : null}
+    </div>
+
+    <div class="av-dialog__footer">
+      <AvButton type="button" variant="ghost" size="md" data-av-cancel disabled={busy}>
+        {cancelLabel}
+      </AvButton>
+
+      <AvButton
+        type="button"
+        variant="primary"
+        size="md"
+        data-av-confirm
+        className={variant === "danger" ? "av-dialog__confirm--danger" : ""}
+        disabled={busy}
+      >
+        {busy ? "Working…" : confirmLabel}
+      </AvButton>
+    </div>
+  </div>
+</dialog>
+
+<script is:inline>
+  (() => {
+    const dialog = document.getElementById(${dialogIdLiteral});
+    if (!dialog || !(dialog instanceof HTMLDialogElement)) return;
+
+    const confirmBtn = dialog.querySelector("[data-av-confirm]");
+    const cancelBtn = dialog.querySelector("[data-av-cancel]");
+
+    function openDialogById(targetId) {
+      const target = document.getElementById(targetId);
+      if (!target || !(target instanceof HTMLDialogElement)) return;
+
+      if (!target.open && typeof target.showModal === "function") {
+        target.showModal();
+      }
+    }
+
+    function closeDialogById(targetId) {
+      const target = document.getElementById(targetId);
+      if (!target || !(target instanceof HTMLDialogElement)) return;
+
+      if (target.open) {
+        target.close();
+      }
+    }
+
+    function dispatch(name) {
+      dialog.dispatchEvent(
+        new CustomEvent(name, {
+          bubbles: true,
+          detail: { id: dialog.id },
+        })
+      );
+    }
+
+    const open = () => openDialogById(dialog.id);
+    const close = () => closeDialogById(dialog.id);
+
+    window.AvDialog = window.AvDialog || {};
+    window.AvDialog.open = (targetId) => openDialogById(targetId);
+    window.AvDialog.close = (targetId) => closeDialogById(targetId);
+
+    confirmBtn?.addEventListener("click", () => {
+      dispatch("av-confirm");
+      close();
+    });
+
+    cancelBtn?.addEventListener("click", () => {
+      dispatch("av-cancel");
+      close();
+    });
+
+    dialog.addEventListener("cancel", (event) => {
+      event.preventDefault();
+      dispatch("av-cancel");
+      close();
+    });
+
+    dialog.addEventListener("click", (event) => {
+      if (event.target === dialog) {
+        dispatch("av-cancel");
+        close();
+      }
+    });
+  })();
+</script>

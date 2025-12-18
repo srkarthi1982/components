@@ -26,4 +26,5 @@ export { default as AvTemplateCard } from './src/AvTemplateCard.astro';
 export { default as AvTemplateGrid } from './src/AvTemplateGrid.astro';
 export { default as AvDrawer } from './src/AvDrawer.astro';
 export { default as AvAccordion } from './src/AvAccordion.astro';
+export { default as AvConfirmDialog } from './src/AvConfirmDialog.astro';
 export * from "./src/alpine";
