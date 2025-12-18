@@ -3,23 +3,56 @@ import AvButton from "./AvButton.astro";
 import AvCard from "./AvCard.astro";
 
 interface Props {
-  title: string;
+  // preferred Ansiversa naming
+  headline?: string;
+
+  // current naming (keep for backward compatibility)
+  title?: string;
+
   description?: string;
+
+  // CTA
   ctaLabel?: string;
-  ctaHref?: string;
+  ctaHref?: string;        // if provided => link CTA
+  ctaDisabled?: boolean;   // if button CTA
+  className?: string;
 }
 
-const { title, description, ctaLabel, ctaHref } = Astro.props as Props;
+const {
+  headline,
+  title,
+  description,
+  ctaLabel,
+  ctaHref,
+  ctaDisabled = false,
+  className = "",
+  ...attrs
+} = Astro.props as Props & Record<string, any>;
+
+const resolvedTitle = headline ?? title ?? "Empty";
 ---
 
-<AvCard className="av-empty-state">
+<AvCard className={`av-empty-state ${className}`.trim()} {...attrs}>
   <div class="av-empty-state__body">
-    <h3 class="av-empty-state__title">{title}</h3>
+    <h3 class="av-empty-state__title">{resolvedTitle}</h3>
+
     {description && <p class="av-empty-state__description">{description}</p>}
-    {ctaLabel && ctaHref && (
-      <AvButton href={ctaHref} variant="primary">
-        {ctaLabel}
-      </AvButton>
-    )}
+
+    {ctaLabel ? (
+      ctaHref ? (
+        <AvButton href={ctaHref} variant="primary">
+          {ctaLabel}
+        </AvButton>
+      ) : (
+        <AvButton
+          type="button"
+          variant="primary"
+          disabled={ctaDisabled}
+          onclick="this.dispatchEvent(new CustomEvent('cta', { bubbles: true }))"
+        >
+          {ctaLabel}
+        </AvButton>
+      )
+    ) : null}
   </div>
 </AvCard>
