@@ -1,0 +1,123 @@
+---
+export interface AvAccordionItem {
+  id?: string;
+  title: string;
+  content: string;
+  disabled?: boolean;
+}
+
+interface Props {
+  items: AvAccordionItem[];
+  mode?: "single" | "multiple";
+  defaultOpenIds?: string[];
+  variant?: "default" | "soft" | "auth";
+  className?: string;
+  [attrs: string]: any;
+}
+
+const {
+  items = [],
+  mode = "multiple",
+  defaultOpenIds = [],
+  variant = "default",
+  className = "",
+  ...attrs
+} = Astro.props as Props;
+
+const accordionId = `av-accordion-${Math.random().toString(36).slice(2)}`;
+
+const preparedItems = items.map((item, index) => {
+  const id = item.id ?? `item-${index}`;
+  const isDefaultOpen = !item.disabled && defaultOpenIds?.includes(id);
+
+  return {
+    ...item,
+    id,
+    isDefaultOpen,
+  };
+});
+
+const wrapperClass = [
+  "av-accordion",
+  `av-accordion--${variant}`,
+  className,
+]
+  .filter(Boolean)
+  .join(" ");
+
+const isSingleMode = mode === "single";
+const needsScript = isSingleMode || preparedItems.some((item) => item.disabled);
+
+const scriptContent = `
+  const root = document.getElementById("${accordionId}");
+  const isSingleMode = ${JSON.stringify(isSingleMode)};
+
+  if (root) {
+    root.addEventListener("click", (event) => {
+      const target = event.target;
+      const summary = target instanceof HTMLElement ? target.closest("summary") : null;
+      if (!summary) return;
+
+      const details = summary.parentElement;
+      if (details?.dataset.disabled === "true") {
+        event.preventDefault();
+        event.stopPropagation();
+      }
+    });
+
+    root.addEventListener("toggle", (event) => {
+      const details = event.target;
+      if (!(details instanceof HTMLDetailsElement)) return;
+
+      const isDisabled = details.dataset.disabled === "true";
+      if (isDisabled && details.open) {
+        details.open = false;
+        return;
+      }
+
+      if (isSingleMode && details.open) {
+        root
+          .querySelectorAll("details[data-av-accordion-item]")
+          .forEach((item) => {
+            if (item !== details && item instanceof HTMLDetailsElement) {
+              item.open = false;
+            }
+          });
+      }
+    });
+  }
+`;
+---
+
+<div
+  id={accordionId}
+  class={wrapperClass}
+  data-av-accordion-root
+  data-mode={mode}
+  {...attrs}
+>
+  {preparedItems.map((item) => (
+    <details
+      class={`av-accordion__item ${item.disabled ? "is-disabled" : ""}`}
+      open={item.isDefaultOpen}
+      data-av-accordion-item
+      data-id={item.id}
+      data-disabled={item.disabled ? "true" : undefined}
+      aria-disabled={item.disabled ? "true" : undefined}
+      disabled={item.disabled ? true : undefined}
+    >
+      <summary
+        class="av-accordion__summary"
+        aria-disabled={item.disabled ? "true" : undefined}
+        tabindex={item.disabled ? -1 : undefined}
+      >
+        <span class="av-accordion__icon" aria-hidden="true"></span>
+        <span class="av-accordion__title">{item.title}</span>
+      </summary>
+
+      <div class="av-accordion__content" set:html={item.content}></div>
+    </details>
+  ))}
+</div>
+
+{needsScript ? <script is:inline set:html={scriptContent}></script> : null}
