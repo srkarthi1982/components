@@ -1,9 +1,9 @@
 ---
-import AvButton from "./AvButton.astro";
+import { AvButton } from "@ansiversa/components";
 
 interface Props {
   id: string;
-  title?: string;
+  headline?: string;
   description?: string;
   confirmLabel?: string;
   cancelLabel?: string;
@@ -14,19 +14,23 @@ interface Props {
 
 const {
   id,
-  title = "Confirm",
+  headline = "Confirm",
   description,
   confirmLabel = "Confirm",
   cancelLabel = "Cancel",
   variant = "default",
   busy = false,
   className = "",
-} = Astro.props as Props;
+  ...attrs
+} = Astro.props as Props & Record<string, unknown>;
+
+if (!id) {
+  throw new Error("AvConfirmDialog requires an `id` prop.");
+}
 
 const labelId = `${id}-title`;
 const descId = description ? `${id}-desc` : undefined;
 const dialogClass = `av-dialog av-dialog--${variant} ${className}`.trim();
-const dialogIdLiteral = JSON.stringify(id);
 ---
 
 <dialog
@@ -35,10 +39,11 @@ const dialogIdLiteral = JSON.stringify(id);
   aria-modal="true"
   aria-labelledby={labelId}
   aria-describedby={description ? descId : undefined}
+  {...attrs}
 >
   <div class="av-dialog__panel" role="document">
     <div class="av-dialog__header">
-      <h2 class="av-dialog__title" id={labelId}>{title}</h2>
+      <h2 class="av-dialog__title" id={labelId}>{headline}</h2>
       {description ? <p class="av-dialog__desc" id={descId}>{description}</p> : null}
     </div>
 
@@ -55,75 +60,65 @@ const dialogIdLiteral = JSON.stringify(id);
         className={variant === "danger" ? "av-dialog__confirm--danger" : ""}
         disabled={busy}
       >
-        {busy ? "Working…" : confirmLabel}
+        {busy ? "Working..." : confirmLabel}
       </AvButton>
     </div>
   </div>
 </dialog>
 
-<script is:inline>
-  (() => {
-    const dialog = document.getElementById(${dialogIdLiteral});
-    if (!dialog || !(dialog instanceof HTMLDialogElement)) return;
+<script define:vars={{ dialogId: id }}>
+(() => {
+  const dialog = document.getElementById(dialogId);
+  if (!dialog) return;
 
-    const confirmBtn = dialog.querySelector("[data-av-confirm]");
-    const cancelBtn = dialog.querySelector("[data-av-cancel]");
+  const confirmBtn = dialog.querySelector("[data-av-confirm]");
+  const cancelBtn = dialog.querySelector("[data-av-cancel]");
 
-    function openDialogById(targetId) {
-      const target = document.getElementById(targetId);
-      if (!target || !(target instanceof HTMLDialogElement)) return;
+  function dispatch(name) {
+    dialog.dispatchEvent(
+      new CustomEvent(name, { bubbles: true, detail: { id: dialogId } })
+    );
+  }
 
-      if (!target.open && typeof target.showModal === "function") {
-        target.showModal();
-      }
+  function open() {
+    if (!dialog.open && typeof dialog.showModal === "function") {
+      dialog.showModal();
     }
+  }
 
-    function closeDialogById(targetId) {
-      const target = document.getElementById(targetId);
-      if (!target || !(target instanceof HTMLDialogElement)) return;
+  function close() {
+    if (dialog.open) dialog.close();
+  }
 
-      if (target.open) {
-        target.close();
-      }
-    }
+  window.AvDialog = window.AvDialog || {};
+  window.AvDialog.open = (targetId) => {
+    if (targetId === dialogId) open();
+  };
+  window.AvDialog.close = (targetId) => {
+    if (targetId === dialogId) close();
+  };
 
-    function dispatch(name) {
-      dialog.dispatchEvent(
-        new CustomEvent(name, {
-          bubbles: true,
-          detail: { id: dialog.id },
-        })
-      );
-    }
+  confirmBtn?.addEventListener("click", () => {
+    dispatch("av-confirm");
+    close();
+  });
 
-    const open = () => openDialogById(dialog.id);
-    const close = () => closeDialogById(dialog.id);
+  cancelBtn?.addEventListener("click", () => {
+    dispatch("av-cancel");
+    close();
+  });
 
-    window.AvDialog = window.AvDialog || {};
-    window.AvDialog.open = (targetId) => openDialogById(targetId);
-    window.AvDialog.close = (targetId) => closeDialogById(targetId);
+  dialog.addEventListener("cancel", (e) => {
+    e.preventDefault(); // Escape
+    dispatch("av-cancel");
+    close();
+  });
 
-    confirmBtn?.addEventListener("click", () => {
-      dispatch("av-confirm");
-      close();
-    });
-
-    cancelBtn?.addEventListener("click", () => {
+  dialog.addEventListener("click", (e) => {
+    if (e.target === dialog) {
       dispatch("av-cancel");
       close();
-    });
-
-    dialog.addEventListener("cancel", (event) => {
-      event.preventDefault();
-      dispatch("av-cancel");
-      close();
-    });
-
-    dialog.addEventListener("click", (event) => {
-      if (event.target === dialog) {
-        dispatch("av-cancel");
-        close();
-      }
-    });
-  })();
+    }
+  });
+})();
 </script>
