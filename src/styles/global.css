@@ -250,6 +250,45 @@
     }
   }
 
+  /* FAQ admin */
+  .av-faq-admin__header {
+    padding: 0.75rem 0;
+  }
+
+  .av-faq-admin__section .av-container {
+    padding-top: 1rem;
+  }
+
+  .av-faq-admin__order {
+    display: grid;
+    gap: 0.4rem;
+  }
+
+  .av-faq-admin__order-actions {
+    display: flex;
+    gap: 0.35rem;
+  }
+
+  .av-faq-admin__crumbwrap {
+    display: grid;
+    gap: 0.25rem;
+  }
+
+  .av-faq-admin__count {
+    color: var(--ans-muted);
+    font-size: 0.875rem;
+  }
+
+  @media (min-width: 768px) {
+    .av-faq-admin__header {
+      padding: 1rem 0;
+    }
+
+    .av-faq-admin__section .av-container {
+      padding-top: 1.25rem;
+    }
+  }
+
   .av-page {
     @apply min-h-screen flex flex-col;
   }
@@ -309,6 +348,7 @@
   }
 
   .av-icon {
+    display: block;
     @apply h-4 w-4;
     fill: #fff;
     stroke: #fff;
@@ -680,6 +720,26 @@
     @apply bg-rose-500/80 border-rose-200;
   }
 
+  /* Drawer overlay --------------------------------------- */
+  .av-drawer-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(15, 23, 42, 0.6);
+    display: flex;
+    align-items: stretch;
+    justify-content: flex-end;
+    padding: 1.5rem;
+    box-sizing: border-box;
+    z-index: 1000;
+  }
+
+  .av-drawer-overlay > * {
+    max-width: min(640px, 100%);
+    width: 100%;
+    max-height: 100vh;
+    overflow-y: auto;
+  }
+
   /* TABLE */
 .av-table {
   border: 1px solid var(--ans-border);
@@ -748,6 +808,27 @@
   gap: 0.5rem;
   justify-content: flex-end;
   white-space: nowrap;
+}
+
+/* table column sizing + alignment */
+.av-table__th-actions {
+  width: 240px;
+  text-align: right;
+  white-space: nowrap;
+}
+
+.av-table__td-actions {
+  text-align: right;
+}
+
+.av-table__th-order {
+  width: 84px;
+  white-space: nowrap;
+}
+
+/* strong cell text */
+.av-table__cell-strong {
+  font-weight: 700;
 }
 
 /* TOOLBAR */
@@ -893,7 +974,7 @@
   }
 
   .av-navbar-inner {
-    @apply w-full max-w-5xl mx-auto px-1 flex items-center justify-between py-3 gap-4;
+    @apply w-full max-w-none px-0 flex items-center justify-between py-3 gap-4;
   }
 
   .av-nav {
@@ -1406,6 +1487,10 @@
 
 .av-w-full {
   width: 100%;
+}
+
+.av-m-0 {
+  margin: 0;
 }
   .av-shadow-soft { box-shadow: var(--av-shadow-soft); }
   .av-shadow-glow { box-shadow: var(--av-shadow-glow); }
