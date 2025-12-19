@@ -302,6 +302,11 @@
     font-size: 0.875rem;
   }
 
+  .av-faq-admin__section .av-container {
+    padding-top: 0;
+    padding-bottom: 0;
+  }
+
   @media (min-width: 768px) {
     .av-faq-admin__header {
       padding: 1rem 0;
