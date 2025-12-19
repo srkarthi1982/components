@@ -252,7 +252,13 @@
 
   /* FAQ admin */
   .av-faq-admin__header {
+    display: grid;
+    gap: 0.4rem;
     padding: 0.75rem 0;
+  }
+
+  .av-faq-admin__title {
+    font-size: 1.5rem;
   }
 
   .av-faq-admin__section .av-container {
@@ -812,8 +818,8 @@
 
 /* table column sizing + alignment */
 .av-table__th-actions {
-  width: 240px;
-  text-align: right;
+  width: 150px;
+  text-align: center;
   white-space: nowrap;
 }
 
@@ -822,7 +828,8 @@
 }
 
 .av-table__th-order {
-  width: 84px;
+  width: 60px;
+  text-align: center;
   white-space: nowrap;
 }
 
