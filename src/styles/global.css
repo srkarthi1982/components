@@ -281,9 +281,6 @@
     font-size: 1.5rem;
   }
 
-  .av-faq-admin__section .av-container {
-    padding-top: 1rem;
-  }
 
   .av-faq-admin__order {
     display: grid;
@@ -308,10 +305,6 @@
   @media (min-width: 768px) {
     .av-faq-admin__header {
       padding: 1rem 0;
-    }
-
-    .av-faq-admin__section .av-container {
-      padding-top: 1.25rem;
     }
   }
 
@@ -908,10 +901,6 @@
 
 .av-admin-page-top {
   padding-top: 1rem;
-}
-
-.av-admin-page-head {
-  margin-bottom: 0.75rem;
 }
 
 .av-faq-admin__count {
