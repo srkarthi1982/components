@@ -828,7 +828,7 @@
 }
 
 .av-table__th-order {
-  width: 60px;
+  width: 84px;
   text-align: center;
   white-space: nowrap;
 }
@@ -879,6 +879,15 @@
   display: flex;
   gap: 0.5rem;
   justify-content: flex-end;
+}
+
+.av-admin-page-top {
+  padding-top: 1rem;
+}
+
+.av-faq-admin__count {
+  color: var(--ans-muted);
+  font-size: 0.875rem;
 }
 
 .av-table-toolbar input,

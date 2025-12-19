@@ -12,8 +12,10 @@ const { title, subtitle, className = "" } = Astro.props as Props;
 
 <div class={`av-table-toolbar ${className}`}>
   <div class="av-table-toolbar__left">
-    <h1 class="av-table-toolbar__title">{title}</h1>
-    {subtitle ? <p class="av-table-toolbar__subtitle">{subtitle}</p> : null}
+    <slot name="title">
+      <h1 class="av-table-toolbar__title">{title}</h1>
+      {subtitle ? <p class="av-table-toolbar__subtitle">{subtitle}</p> : null}
+    </slot>
   </div>
 
   <div class="av-table-toolbar__right">
