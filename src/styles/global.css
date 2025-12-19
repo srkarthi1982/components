@@ -899,6 +899,11 @@
   display: flex;
   gap: 0.5rem;
   justify-content: flex-end;
+  margin-left: auto;
+}
+
+.av-table-toolbar__search > * {
+  width: 100%;
 }
 
 .av-admin-page-top {
