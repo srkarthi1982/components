@@ -238,6 +238,15 @@
     flex: 0 0 auto;
   }
 
+  .av-faq-public__top {
+    padding-top: 1.25rem;
+  }
+
+  .av-faq-public__count {
+    color: var(--ans-muted);
+    font-size: 0.875rem;
+  }
+
   @media (max-width: 640px) {
     .av-faq-summary {
       flex-wrap: wrap;
