@@ -238,34 +238,34 @@
     flex: 0 0 auto;
   }
 
-  .av-faq-public__top {
-    padding-top: 1.25rem;
-    padding-bottom: 0.5rem;
-  }
+  /* FAQ (Public) ------------------------------------------ */
 
   .av-faq-public__count {
-    color: var(--ans-muted);
+    color: var(--av-text-muted);
     font-size: 0.875rem;
   }
 
   .av-faq-public__crumb {
-    margin: 10px 0;
+    /* keep it tight like admin */
+    margin: 0.75rem 0 0.5rem;
+  }
+
+  /* IMPORTANT: remove extra vertical padding (this was the “bottom gap”) */
+  .av-faq-public__section {
+    padding-top: 0;
+    padding-bottom: 0;
+  }
+
+  /* remove default container vertical padding inside section */
+  .av-faq-public__section > .av-container {
+    padding-top: 0;
+    padding-bottom: 0;
   }
 
   .av-faq-public__search {
     display: flex;
     align-items: center;
     gap: 0.5rem;
-  }
-
-  .av-faq-public__section {
-    padding-top: 1rem;
-    padding-bottom: 1.5rem;
-  }
-
-  .av-faq-public__section > .av-container {
-    padding-top: 0;
-    padding-bottom: 0;
   }
 
   @media (max-width: 640px) {
