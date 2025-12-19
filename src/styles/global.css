@@ -302,7 +302,7 @@
     font-size: 0.875rem;
   }
 
-  .av-faq-admin__section .av-container {
+  .av-faq-admin__section > .av-container {
     padding-top: 0;
     padding-bottom: 0;
   }
@@ -492,7 +492,7 @@
     @apply border-t-0;
   }
 
-  .av-section .av-container {
+  .av-section > .av-container {
     @apply py-10 md:py-14;
   }
 
