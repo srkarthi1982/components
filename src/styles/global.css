@@ -680,6 +680,142 @@
     @apply bg-rose-500/80 border-rose-200;
   }
 
+  /* TABLE */
+.av-table {
+  border: 1px solid var(--ans-border);
+  border-radius: var(--ans-radius-lg);
+  background: var(--ans-surface);
+  overflow: hidden;
+}
+
+.av-table--scroll {
+  overflow-x: auto;
+}
+
+.av-table__table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  min-width: 720px;
+}
+
+.av-table--dense .av-table__table th,
+.av-table--dense .av-table__table td {
+  padding-top: 0.55rem;
+  padding-bottom: 0.55rem;
+}
+
+.av-table__caption {
+  text-align: left;
+  padding: 0.75rem 1rem;
+  color: var(--ans-muted);
+  font-size: 0.875rem;
+}
+
+.av-table__table thead th {
+  text-align: left;
+  font-weight: 600;
+  color: var(--ans-text);
+  background: var(--ans-surface-2);
+  border-bottom: 1px solid var(--ans-border);
+  padding: 0.8rem 1rem;
+  white-space: nowrap;
+}
+
+.av-table--sticky thead th {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+}
+
+.av-table__table tbody td {
+  padding: 0.9rem 1rem;
+  border-bottom: 1px solid var(--ans-border);
+  color: var(--ans-text);
+  vertical-align: top;
+}
+
+.av-table__table tbody tr:hover td {
+  background: var(--ans-surface-2);
+}
+
+.av-table__cell-muted {
+  color: var(--ans-muted);
+}
+
+.av-table__cell-actions {
+  display: flex;
+  gap: 0.5rem;
+  justify-content: flex-end;
+  white-space: nowrap;
+}
+
+/* TOOLBAR */
+.av-table-toolbar {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 0.75rem;
+}
+
+.av-table-toolbar__title {
+  font-size: 1.25rem;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.av-table-toolbar__subtitle {
+  margin-top: 0.25rem;
+  color: var(--ans-muted);
+  font-size: 0.875rem;
+}
+
+.av-table-toolbar__row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+  flex-wrap: wrap;
+}
+
+.av-table-toolbar__search {
+  min-width: 260px;
+  flex: 1;
+}
+
+.av-table-toolbar__actions {
+  display: flex;
+  gap: 0.5rem;
+  justify-content: flex-end;
+}
+
+/* PAGER */
+.av-table-pager {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  margin-top: 1rem;
+}
+
+.av-table-pager__meta {
+  color: var(--ans-muted);
+  font-size: 0.875rem;
+}
+
+.av-table-pager__buttons {
+  display: flex;
+  gap: 0.5rem;
+}
+
+/* DISABLED ANCHOR/BUTTON HELPER */
+.av-is-disabled {
+  pointer-events: none;
+  opacity: 0.5;
+}
+
   /* Forms ------------------------------------------------- */
 
 .av-text-error {

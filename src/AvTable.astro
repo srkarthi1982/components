@@ -1,0 +1,18 @@
+---
+interface Props {
+  caption?: string;
+  className?: string;
+  dense?: boolean;
+  stickyHeader?: boolean;
+  scroll?: boolean; // enable x-scroll container
+}
+
+const { caption, className = "", dense = false, stickyHeader = false, scroll = true } = Astro.props as Props;
+---
+
+<div class={`av-table ${scroll ? "av-table--scroll" : ""} ${dense ? "av-table--dense" : ""} ${stickyHeader ? "av-table--sticky" : ""} ${className}`}>
+  <table class="av-table__table">
+    {caption ? <caption class="av-table__caption">{caption}</caption> : null}
+    <slot />
+  </table>
+</div>

@@ -1,0 +1,32 @@
+---
+import AvButton from "./AvButton.astro";
+
+interface Props {
+  title: string;
+  subtitle?: string; // like "12 items"
+  className?: string;
+}
+
+const { title, subtitle, className = "" } = Astro.props as Props;
+---
+
+<div class={`av-table-toolbar ${className}`}>
+  <div class="av-table-toolbar__left">
+    <h1 class="av-table-toolbar__title">{title}</h1>
+    {subtitle ? <p class="av-table-toolbar__subtitle">{subtitle}</p> : null}
+  </div>
+
+  <div class="av-table-toolbar__right">
+    <slot name="right" />
+  </div>
+</div>
+
+<div class="av-table-toolbar__row">
+  <div class="av-table-toolbar__search">
+    <slot name="search" />
+  </div>
+
+  <div class="av-table-toolbar__actions">
+    <slot name="actions" />
+  </div>
+</div>
