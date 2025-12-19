@@ -258,6 +258,16 @@
     gap: 0.5rem;
   }
 
+  .av-faq-public__section {
+    padding-top: 1rem;
+    padding-bottom: 1.5rem;
+  }
+
+  .av-faq-public__section > .av-container {
+    padding-top: 0;
+    padding-bottom: 0;
+  }
+
   @media (max-width: 640px) {
     .av-faq-summary {
       flex-wrap: wrap;
