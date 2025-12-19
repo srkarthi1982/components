@@ -910,6 +910,10 @@
   padding-top: 1rem;
 }
 
+.av-admin-page-head {
+  margin-bottom: 0.75rem;
+}
+
 .av-faq-admin__count {
   color: var(--ans-muted);
   font-size: 0.875rem;
