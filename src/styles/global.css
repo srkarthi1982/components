@@ -252,6 +252,12 @@
     margin: 10px 0;
   }
 
+  .av-faq-public__search {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
   @media (max-width: 640px) {
     .av-faq-summary {
       flex-wrap: wrap;
