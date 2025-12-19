@@ -845,6 +845,8 @@
   justify-content: space-between;
   gap: 1rem;
   margin-bottom: 0.75rem;
+  position: relative;
+  z-index: 1;
 }
 
 .av-table-toolbar__title {
@@ -877,6 +879,12 @@
   display: flex;
   gap: 0.5rem;
   justify-content: flex-end;
+}
+
+.av-table-toolbar input,
+.av-table-toolbar .av-input {
+  position: relative;
+  z-index: 1;
 }
 
 /* PAGER */
@@ -978,6 +986,13 @@
 
   .av-navbar {
     @apply border-b border-slate-800/60 bg-slate-950/60 backdrop-blur-xl;
+    position: relative;
+    z-index: 50;
+  }
+
+  .av-navbar__dropdown {
+    position: absolute;
+    z-index: 60;
   }
 
   .av-navbar-inner {
