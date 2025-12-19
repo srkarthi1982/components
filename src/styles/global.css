@@ -248,6 +248,10 @@
     font-size: 0.875rem;
   }
 
+  .av-faq-public__crumb {
+    margin: 10px 0;
+  }
+
   @media (max-width: 640px) {
     .av-faq-summary {
       flex-wrap: wrap;
