@@ -1,6 +1,5 @@
 ---
 import AvButton from "./AvButton.astro";
-import AvContainer from "./AvContainer.astro";
 
 interface Crumb {
   label: string;
@@ -25,7 +24,7 @@ const rootClassAttr = rootClasses.join(" ");
 ---
 
 <nav class={rootClassAttr} aria-label="Breadcrumb" {...attrs}>
-  <AvContainer className="av-breadcrumb__container">
+  <div class="av-breadcrumb__container">
     <ol class="av-breadcrumb__list">
       {items.map((item, index) => {
         const isLast = index === items.length - 1;
@@ -59,7 +58,7 @@ const rootClassAttr = rootClasses.join(" ");
         );
       })}
     </ol>
-  </AvContainer>
+  </div>
 </nav>
 
 <style>
