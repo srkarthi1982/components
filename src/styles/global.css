@@ -796,8 +796,8 @@
 
   /* Avoid a second dark band when the overlay already dims the page. */
   .av-drawer-overlay .av-drawer {
-    box-shadow: none;
-    border-left: none;
+    box-shadow: none !important;
+    border-left: none !important;
   }
 
   /* TABLE */
