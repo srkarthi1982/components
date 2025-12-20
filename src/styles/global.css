@@ -780,6 +780,12 @@
     overflow-y: auto;
   }
 
+  /* Drawer: always pin panel to the RIGHT (some components add auto-margins) */
+  .av-drawer-overlay > * {
+    margin-left: auto !important;
+    margin-right: 0 !important;
+  }
+
   /* TABLE */
 .av-table {
   border: 1px solid var(--ans-border);
