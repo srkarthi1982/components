@@ -800,6 +800,19 @@
     border-left: none !important;
   }
 
+  /* Let the overlay handle backdrop clicks; don't let the drawer root block it. */
+  .av-drawer-overlay .av-drawer-root {
+    position: static;
+    inset: auto;
+    width: auto;
+    height: auto;
+    pointer-events: none;
+  }
+
+  .av-drawer-overlay .av-drawer {
+    pointer-events: auto;
+  }
+
   /* TABLE */
 .av-table {
   border: 1px solid var(--ans-border);
