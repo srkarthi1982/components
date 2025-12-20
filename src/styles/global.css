@@ -786,6 +786,14 @@
     margin-right: 0 !important;
   }
 
+  /* Ansiversa standard: only ONE overlay source */
+  .av-drawer-overlay .av-drawer__backdrop,
+  .av-drawer-overlay .av-drawer-backdrop,
+  .av-drawer-overlay .av-drawer__overlay,
+  .av-drawer-overlay [data-av-drawer-backdrop] {
+    display: none !important;
+  }
+
   /* TABLE */
 .av-table {
   border: 1px solid var(--ans-border);
