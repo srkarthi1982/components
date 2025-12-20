@@ -794,6 +794,12 @@
     display: none !important;
   }
 
+  /* Avoid a second dark band when the overlay already dims the page. */
+  .av-drawer-overlay .av-drawer {
+    box-shadow: none;
+    border-left: none;
+  }
+
   /* TABLE */
 .av-table {
   border: 1px solid var(--ans-border);
