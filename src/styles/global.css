@@ -1771,6 +1771,22 @@
 .av-m-0 {
   margin: 0;
 }
+
+  /* Generic spacing/type utilities (Apps page cleanup) */
+  .av-mt-8 { margin-top: 2rem; }
+  .av-mt-3 { margin-top: 0.75rem; }
+  .av-mt-2 { margin-top: 0.5rem; }
+
+  .av-ml-2 { margin-left: 0.5rem; }
+
+  .av-block { display: block; }
+
+  /* label spacing used under search inputs */
+  .av-mb-label { margin-bottom: 0.35rem; }
+
+  /* slightly smaller soft text (keeps existing feel) */
+  .av-text-sm-soft { font-size: 0.9rem; }
+  .av-font-normal { font-weight: 400; }
   .av-shadow-soft { box-shadow: var(--av-shadow-soft); }
   .av-shadow-glow { box-shadow: var(--av-shadow-glow); }
 
