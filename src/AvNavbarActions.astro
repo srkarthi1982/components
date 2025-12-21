@@ -12,6 +12,7 @@ interface User {
   id: string;
   email: string;
   name?: string;
+  roleId?: number;
 }
 
 interface Props {
@@ -143,6 +144,12 @@ const userInitial =
         <div class="av-user-menu-divider"></div>
 
         <div class="av-nav-user-menu">
+          {user?.roleId === 1 && (
+            <a href={`${ROOT_URL}/admin`} class="av-user-menu-item av-dropdown-item" role="menuitem">
+              <span>Administration</span>
+            </a>
+          )}
+
           <a href={`${ROOT_URL}/dashboard`} class="av-user-menu-item av-dropdown-item" role="menuitem">
             <span>Dashboard</span>
           </a>
