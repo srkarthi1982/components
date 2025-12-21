@@ -33,6 +33,12 @@
   /* Ansiversa highlight (used by a few legacy utilities) */
   --ans-primary: hsl(260, 100%, 70%);
   --ans-primary-rgb: 140, 100, 255; /* MUST match --ans-primary */
+  --ans-border: var(--av-border-subtle);
+  --ans-surface: var(--av-surface);
+  --ans-surface-2: var(--av-surface-soft);
+  --ans-muted: var(--av-text-muted);
+  --ans-text: var(--av-text);
+  --ans-radius-lg: var(--av-radius-lg);
 
   /* Layout & Radius */
   --av-radius-xs: 0.375rem;
@@ -280,51 +286,157 @@
     }
   }
 
-  /* FAQ admin */
-  .av-faq-admin__header {
+  /* Admin list page (generic) ------------------------------------------ */
+  .av-admin-header {
     display: grid;
     gap: 0.4rem;
     padding: 0.75rem 0;
   }
 
-  .av-faq-admin__section {
+  .av-admin-section {
     padding-top: 1rem;
     padding-bottom: 1.25rem;
   }
 
-  .av-faq-admin__title {
+  .av-admin-title {
     font-size: 1.5rem;
   }
 
+  /* Admin list page (generic) ------------------------------------------ */
+  .av-admin-titlewrap {
+    display: flex;
+    align-items: baseline;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+  }
 
-  .av-faq-admin__order {
+  .av-admin-count-inline {
+    color: var(--av-text-muted);
+    font-size: 0.875rem;
+  }
+
+  .av-admin-toolbar-left {
+    display: grid;
+    gap: 0.5rem;
+  }
+
+  .av-admin-toolbar-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.75rem;
+  }
+
+  .av-admin-toolbar-top .av-table-toolbar__subtitle {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .av-admin-toolbar-actions {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .av-admin-icon {
+    font-size: 0.95rem;
+    line-height: 1;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .av-admin-icon--sm {
+    font-size: 0.85rem;
+  }
+
+  .av-admin-icon--lg {
+    font-size: 1.2rem;
+  }
+
+  .av-admin-filters {
+    display: grid;
+    gap: 0.5rem;
+  }
+
+  @media (min-width: 1024px) {
+    .av-admin-filters {
+      display: flex;
+      flex-wrap: nowrap;
+      align-items: flex-end;
+      gap: 0.5rem;
+    }
+
+    .av-admin-filter {
+      flex: 1 1 0;
+      min-width: 160px;
+    }
+
+    .av-admin-filter--search {
+      flex: 2 1 0;
+    }
+
+    .av-admin-filter--sort {
+      flex: 0 1 180px;
+    }
+
+    .av-admin-section .av-table-toolbar__row {
+      flex-wrap: nowrap;
+      align-items: flex-end;
+      gap: 0;
+    }
+
+    .av-admin-section .av-table-toolbar__search {
+      min-width: 0;
+    }
+
+    .av-admin-section .av-table-toolbar__actions {
+      display: none;
+    }
+
+    .av-admin-section .av-table__th-order,
+    .av-admin-section .av-table__th-actions {
+      text-align: center;
+    }
+
+    .av-admin-section .av-table__td-actions {
+      text-align: center;
+    }
+
+    .av-admin-section .av-table__cell-actions {
+      justify-content: center;
+    }
+  }
+
+  .av-admin-order {
     display: grid;
     gap: 0.4rem;
   }
 
-  .av-faq-admin__order-actions {
+  .av-admin-order-actions {
     display: flex;
     gap: 0.35rem;
   }
 
-  .av-faq-admin__crumbwrap {
+  .av-admin-crumbwrap {
     display: grid;
     gap: 0.25rem;
     padding-top: 0;
   }
 
-  .av-faq-admin__count {
-    color: var(--ans-muted);
+  .av-admin-count {
+    color: var(--av-text-muted);
     font-size: 0.875rem;
   }
 
-  .av-faq-admin__section > .av-container {
+  .av-admin-section > .av-container {
     padding-top: 0;
     padding-bottom: 0;
   }
 
   @media (min-width: 768px) {
-    .av-faq-admin__header {
+    .av-admin-header {
       padding: 1rem 0;
     }
   }
@@ -955,11 +1067,6 @@
 
 .av-admin-page-top {
   padding-top: 1rem;
-}
-
-.av-faq-admin__count {
-  color: var(--ans-muted);
-  font-size: 0.875rem;
 }
 
 .av-table-toolbar input,
