@@ -274,6 +274,102 @@
     gap: 0.5rem;
   }
 
+  /* Public list page (generic) ----------------------------------------- */
+
+  .av-public-titlewrap {
+    display: flex;
+    align-items: baseline;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+  }
+
+  .av-public-count-inline {
+    color: var(--av-text-muted);
+    font-size: 0.875rem;
+  }
+
+  .av-public-toolbar-left {
+    display: grid;
+    gap: 0.5rem;
+  }
+
+  .av-public-toolbar-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.75rem;
+    width: 100%;
+  }
+
+  .av-public-filters {
+    display: grid;
+    gap: 0.5rem;
+  }
+
+  /* tighten toolbar spacing */
+  .av-faq-public__section .av-table-toolbar__row {
+    gap: 0;
+  }
+
+  /* hide default toolbar action slot (actions live in title/top area) */
+  .av-faq-public__section .av-table-toolbar__actions {
+    display: none;
+  }
+
+  /* selects grid on mobile */
+  .av-public-filter-selects {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.5rem;
+  }
+
+  .av-public-filter-selects .av-public-select-lg {
+    grid-column: 1 / -1;
+  }
+
+  @media (min-width: 1024px) {
+    .av-public-filters {
+      display: flex;
+      flex-wrap: nowrap;
+      align-items: flex-end;
+      gap: 0.5rem;
+    }
+
+    .av-faq-public__section .av-table-toolbar__row {
+      gap: 0;
+      align-items: flex-end;
+      flex-wrap: nowrap;
+    }
+
+    .av-faq-public__section .av-table-toolbar__actions {
+      display: none;
+    }
+
+    .av-public-filters > .av-public-filter-search {
+      flex: 2 1 0;
+      width: auto;
+    }
+
+    .av-public-filter-selects {
+      display: flex;
+      flex: 1 1 640px;
+      gap: 0.5rem;
+      align-items: flex-end;
+    }
+
+    .av-public-select-lg {
+      flex: 2 1 380px;
+    }
+
+    .av-public-select-md {
+      flex: 1 1 220px;
+    }
+
+    .av-public-select-sm {
+      flex: 0 1 170px;
+    }
+  }
+
   @media (max-width: 640px) {
     .av-faq-summary {
       flex-wrap: wrap;
