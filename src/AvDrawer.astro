@@ -26,7 +26,7 @@ const { title, description } = Astro.props as Props;
         type="button"
         class="av-drawer__close"
         aria-label="Close"
-        x-on:click="$dispatch('close-drawer')"
+        x-on:click="if (typeof closeDrawer === 'function') closeDrawer(); $dispatch('close-drawer')"
       >
         <span aria-hidden="true">×</span>
       </button>
