@@ -390,6 +390,10 @@
     .av-navbar-actions {
       padding-right: 0.5rem;
     }
+
+    .av-navbar-actions .av-btn-primary {
+      margin-right: 0.5rem;
+    }
   }
 
   /* Admin list page (generic) ------------------------------------------ */
