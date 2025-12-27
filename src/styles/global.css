@@ -606,7 +606,7 @@
 }
 
   .av-navbar-actions {
-    @apply flex items-center gap-2;
+    @apply flex items-center gap-1;
   }
 
   .av-icon {
