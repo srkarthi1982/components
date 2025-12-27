@@ -750,9 +750,63 @@
     @apply grid gap-5 md:gap-6 md:grid-cols-3;
   }
 
-  .av-section-grid--2 {
-    @apply md:grid-cols-2;
-  }
+.av-section-grid--2 {
+  @apply md:grid-cols-2;
+}
+
+/* Home page helpers ------------------------------------ */
+
+.av-center-narrow {
+  max-width: 62.5rem;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.av-center-copy {
+  max-width: 43.75rem;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.av-grid-auto {
+  display: grid;
+  gap: 2rem;
+  grid-template-columns: repeat(auto-fit, minmax(var(--av-grid-min, 260px), 1fr));
+}
+
+.av-grid-auto--260 {
+  --av-grid-min: 260px;
+}
+
+.av-grid-auto--280 {
+  --av-grid-min: 280px;
+}
+
+.av-grid-auto--mt-4 {
+  margin-top: 1rem;
+}
+
+.av-card--fullheight {
+  height: 100%;
+}
+
+.av-section-lead--spaced {
+  margin-top: 2.5rem;
+}
+
+.av-profile-row {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.av-avatar-lg {
+  width: 90px;
+  height: 90px;
+  border-radius: var(--av-radius-full);
+  object-fit: cover;
+  flex: 0 0 auto;
+}
 /* Pricing ------------------------------------------------ */
 
 .av-pricing-grid {
