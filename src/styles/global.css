@@ -386,6 +386,10 @@
     .av-hide-sm {
       display: none !important;
     }
+
+    .av-navbar-actions {
+      padding-right: 0.5rem;
+    }
   }
 
   /* Admin list page (generic) ------------------------------------------ */
