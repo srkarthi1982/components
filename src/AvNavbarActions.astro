@@ -101,7 +101,7 @@ const userInitial =
     <AvButton
       href={item.href}
       variant="ghost"
-      className="av-nowrap"
+      className={`av-nowrap${item.label === "Pricing" ? " av-hide-sm" : ""}`}
     >
       <span class="av-nav-icon" set:html={renderIcon(item.label)}></span>
       <span class="av-nav-label">{item.label}</span>
