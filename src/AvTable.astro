@@ -20,12 +20,14 @@ const {
 } = Astro.props as Props;
 
 const normalizedSortDir = sortDir === "asc" || sortDir === "desc" ? sortDir : undefined;
+const tableId = `av-table-${Math.random().toString(36).slice(2, 10)}`;
 ---
 
 <div
   class={`av-table ${scroll ? "av-table--scroll" : ""} ${dense ? "av-table--dense" : ""} ${stickyHeader ? "av-table--sticky" : ""} ${className}`}
   data-sort-key={sortKey}
   data-sort-dir={normalizedSortDir}
+  data-av-table-id={tableId}
 >
   <table class="av-table__table">
     {caption ? <caption class="av-table__caption">{caption}</caption> : null}
@@ -33,9 +35,9 @@ const normalizedSortDir = sortDir === "asc" || sortDir === "desc" ? sortDir : un
   </table>
 </div>
 
-<script define:vars={{ initialSortKey: sortKey ?? "", initialSortDir: normalizedSortDir ?? "" }}>
+<script define:vars={{ initialSortKey: sortKey ?? "", initialSortDir: normalizedSortDir ?? "", tableId }}>
 (() => {
-  const root = document.currentScript?.closest(".av-table");
+  const root = document.querySelector(`.av-table[data-av-table-id="${tableId}"]`);
   if (!root) return;
 
   const controls = Array.from(root.querySelectorAll("[data-av-sort]"));
