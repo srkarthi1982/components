@@ -1,0 +1,151 @@
+---
+export interface Props {
+  name:
+    | "apps"
+    | "pricing"
+    | "about"
+    | "home"
+    | "search"
+    | "refresh"
+    | "plus"
+    | "edit"
+    | "trash"
+    | "heart"
+    | "heart-filled"
+    | "eye"
+    | "eye-off"
+    | "chevron-left"
+    | "chevron-right"
+    | "chevron-up"
+    | "chevron-down";
+  size?: "sm" | "md" | "lg";
+  title?: string;
+  className?: string;
+}
+
+const { name, size = "md", title, className } = Astro.props as Props;
+
+const sizeMap = { sm: 16, md: 20, lg: 24 } as const;
+const px = sizeMap[size] ?? 20;
+
+const baseClass = `av-icon av-icon--${size}`;
+const cls = className ? `${baseClass} ${className}` : baseClass;
+
+const ariaHidden = title ? undefined : "true";
+const role = title ? "img" : undefined;
+---
+
+<span class={cls} role={role} aria-hidden={ariaHidden}>
+  <svg
+    width={px}
+    height={px}
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    stroke-width="2"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+  >
+    {title && <title>{title}</title>}
+
+    {name === "home" && (
+      <>
+        <path d="M3 11.5L12 4l9 7.5" />
+        <path d="M5 10.5V20h14v-9.5" />
+      </>
+    )}
+
+    {name === "apps" && (
+      <>
+        <rect x="3" y="3" width="7" height="7" rx="2" />
+        <rect x="14" y="3" width="7" height="7" rx="2" />
+        <rect x="3" y="14" width="7" height="7" rx="2" />
+        <rect x="14" y="14" width="7" height="7" rx="2" />
+      </>
+    )}
+
+    {name === "pricing" && (
+      <>
+        <path d="M6 3h7.586a2 2 0 0 1 1.414.586l4.414 4.414a2 2 0 0 1 0 2.828L13 18.242a2 2 0 0 1-2.828 0L3.586 11.657A2 2 0 0 1 3 10.243V6a3 3 0 0 1 3-3Z" />
+        <path d="M9 6h.01" />
+      </>
+    )}
+
+    {name === "about" && (
+      <>
+        <circle cx="12" cy="8" r="3.25" />
+        <path d="M6 19v-.5a5.5 5.5 0 0 1 11 0V19" />
+        <path d="M12 12.5v2" />
+      </>
+    )}
+
+    {name === "search" && (
+      <>
+        <circle cx="11" cy="11" r="7" />
+        <line x1="21" y1="21" x2="16.65" y2="16.65" />
+      </>
+    )}
+
+    {name === "refresh" && (
+      <>
+        <path d="M3 12a9 9 0 1 0 3-6.7" />
+        <polyline points="3 4 3 10 9 10" />
+      </>
+    )}
+
+    {name === "plus" && (
+      <>
+        <line x1="12" y1="5" x2="12" y2="19" />
+        <line x1="5" y1="12" x2="19" y2="12" />
+      </>
+    )}
+
+    {name === "edit" && (
+      <>
+        <path d="M12 20h9" />
+        <path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L8 18l-4 1 1-4 11.5-11.5z" />
+      </>
+    )}
+
+    {name === "trash" && (
+      <>
+        <polyline points="3 6 5 6 21 6" />
+        <path d="M19 6l-1 14H6L5 6" />
+        <path d="M10 11v6" />
+        <path d="M14 11v6" />
+        <path d="M9 6V4h6v2" />
+      </>
+    )}
+
+    {name === "heart" && (
+      <>
+        <path d="M12 20.5 5.3 13.8a5 5 0 0 1 7-7l.7.7.7-.7a5 5 0 0 1 7 7L12 20.5Z" />
+      </>
+    )}
+
+    {name === "heart-filled" && (
+      <>
+        <path d="M12 20.5 5.3 13.8a5 5 0 0 1 7-7l.7.7.7-.7a5 5 0 0 1 7 7L12 20.5Z" fill="currentColor" stroke="none" />
+      </>
+    )}
+
+    {name === "eye" && (
+      <>
+        <path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7S1 12 1 12z" />
+        <circle cx="12" cy="12" r="3" />
+      </>
+    )}
+
+    {name === "eye-off" && (
+      <>
+        <path d="M17.94 17.94A10.94 10.94 0 0 1 12 19c-7 0-11-7-11-7a21.77 21.77 0 0 1 5.06-5.94m3.07-1.6A10.94 10.94 0 0 1 12 5c7 0 11 7 11 7a21.77 21.77 0 0 1-2.25 3.2" />
+        <line x1="1" y1="1" x2="23" y2="23" />
+      </>
+    )}
+
+    {name === "chevron-left" && <polyline points="15 18 9 12 15 6" />}
+    {name === "chevron-right" && <polyline points="9 18 15 12 9 6" />}
+    {name === "chevron-up" && <polyline points="18 15 12 9 6 15" />}
+    {name === "chevron-down" && <polyline points="6 9 12 15 18 9" />}
+  </svg>
+</span>

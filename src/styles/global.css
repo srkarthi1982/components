@@ -602,10 +602,11 @@
   }
 
   .av-icon {
-    display: block;
-    @apply h-4 w-4;
-    fill: #fff;
-    stroke: #fff;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 0;
+    flex: 0 0 auto;
   }
 
   /* Mobile: only icons */

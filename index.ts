@@ -9,6 +9,7 @@ export { default as AvDivider } from './src/AvDivider.astro';
 export { default as AvFeatureItem } from './src/AvFeatureItem.astro';
 export { default as AvFeatureList } from './src/AvFeatureList.astro';
 export { default as AvFooter } from './src/AvFooter.astro';
+export { default as AvIcon } from './src/AvIcon.astro';
 export { default as AvInput } from './src/AvInput.astro';
 export { default as AvSelect } from './src/AvSelect.astro';
 export { default as AvTextarea } from './src/AvTextarea.astro';
