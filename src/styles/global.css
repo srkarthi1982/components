@@ -1147,10 +1147,12 @@
   border-right: 4px solid transparent;
   border-top: 6px solid var(--ans-muted);
   transform: translateY(1px);
+  opacity: 0;
 }
 
 .av-table__sort--active::after {
   border-top-color: var(--ans-text);
+  opacity: 1;
 }
 
 .av-table__sort--asc::after {
