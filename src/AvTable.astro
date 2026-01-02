@@ -21,7 +21,6 @@ const {
 } = Astro.props as Props & Record<string, unknown>;
 
 const normalizedSortDir = sortDir === "asc" || sortDir === "desc" ? sortDir : undefined;
-const tableId = `av-table-${Math.random().toString(36).slice(2, 10)}`;
 const dataSortKey = "data-sort-key" in attrs ? undefined : sortKey;
 const dataSortDir = "data-sort-dir" in attrs ? undefined : normalizedSortDir;
 ---
@@ -30,18 +29,16 @@ const dataSortDir = "data-sort-dir" in attrs ? undefined : normalizedSortDir;
   class={`av-table ${scroll ? "av-table--scroll" : ""} ${dense ? "av-table--dense" : ""} ${stickyHeader ? "av-table--sticky" : ""} ${className}`}
   data-sort-key={dataSortKey}
   data-sort-dir={dataSortDir}
-  data-av-table-id={tableId}
   {...attrs}
 >
   <table class="av-table__table">
     {caption ? <caption class="av-table__caption">{caption}</caption> : null}
     <slot />
   </table>
-</div>
-
-<script define:vars={{ initialSortKey: sortKey ?? "", initialSortDir: normalizedSortDir ?? "", tableId }}>
+  <script define:vars={{ initialSortKey: sortKey ?? "", initialSortDir: normalizedSortDir ?? "" }}>
 (() => {
-  const root = document.querySelector(`.av-table[data-av-table-id="${tableId}"]`);
+  const script = document.currentScript;
+  const root = script?.closest?.(".av-table");
   if (!root) return;
 
   const controls = Array.from(root.querySelectorAll("[data-av-sort]"));
@@ -100,10 +97,11 @@ const dataSortDir = "data-sort-dir" in attrs ? undefined : normalizedSortDir;
       updateUI(key, nextDir);
       root.dispatchEvent(new CustomEvent("av-sort", { bubbles: true, detail: { key, dir: nextDir } }));
 
-      if (control.tagName === "BUTTON") {
+      if (control.tagName === "BUTTON" || control.tagName === "A" || control.closest("a")) {
         event.preventDefault();
       }
     });
   });
 })();
 </script>
+</div>
