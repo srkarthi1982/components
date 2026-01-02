@@ -17,17 +17,21 @@ const {
   scroll = true,
   sortKey,
   sortDir,
-} = Astro.props as Props;
+  ...attrs
+} = Astro.props as Props & Record<string, unknown>;
 
 const normalizedSortDir = sortDir === "asc" || sortDir === "desc" ? sortDir : undefined;
 const tableId = `av-table-${Math.random().toString(36).slice(2, 10)}`;
+const dataSortKey = "data-sort-key" in attrs ? undefined : sortKey;
+const dataSortDir = "data-sort-dir" in attrs ? undefined : normalizedSortDir;
 ---
 
 <div
   class={`av-table ${scroll ? "av-table--scroll" : ""} ${dense ? "av-table--dense" : ""} ${stickyHeader ? "av-table--sticky" : ""} ${className}`}
-  data-sort-key={sortKey}
-  data-sort-dir={normalizedSortDir}
+  data-sort-key={dataSortKey}
+  data-sort-dir={dataSortDir}
   data-av-table-id={tableId}
+  {...attrs}
 >
   <table class="av-table__table">
     {caption ? <caption class="av-table__caption">{caption}</caption> : null}
@@ -70,6 +74,16 @@ const tableId = `av-table-${Math.random().toString(36).slice(2, 10)}`;
   if (startKey && startDir) {
     applySortState(startKey, startDir);
   }
+
+  const observer = new MutationObserver(() => {
+    const nextKey = root.dataset.sortKey || "";
+    const nextDir = root.dataset.sortDir || "";
+    if (nextKey && nextDir) {
+      applySortState(nextKey, nextDir);
+    }
+  });
+
+  observer.observe(root, { attributes: true, attributeFilter: ["data-sort-key", "data-sort-dir"] });
 
   controls.forEach((control) => {
     control.addEventListener("click", (event) => {
