@@ -47,10 +47,7 @@ const dataSortDir = "data-sort-dir" in attrs ? undefined : normalizedSortDir;
   const controls = Array.from(root.querySelectorAll("[data-av-sort]"));
   if (!controls.length) return;
 
-  function applySortState(key, dir) {
-    root.dataset.sortKey = key || "";
-    root.dataset.sortDir = dir || "";
-
+  function updateUI(key, dir) {
     controls.forEach((control) => {
       const sortKey = control.getAttribute("data-av-sort") || "";
       const th = control.closest("th");
@@ -72,14 +69,14 @@ const dataSortDir = "data-sort-dir" in attrs ? undefined : normalizedSortDir;
   const startKey = root.dataset.sortKey || initialSortKey;
   const startDir = root.dataset.sortDir || initialSortDir;
   if (startKey && startDir) {
-    applySortState(startKey, startDir);
+    updateUI(startKey, startDir);
   }
 
   const observer = new MutationObserver(() => {
     const nextKey = root.dataset.sortKey || "";
     const nextDir = root.dataset.sortDir || "";
     if (nextKey && nextDir) {
-      applySortState(nextKey, nextDir);
+      updateUI(nextKey, nextDir);
     }
   });
 
@@ -98,7 +95,9 @@ const dataSortDir = "data-sort-dir" in attrs ? undefined : normalizedSortDir;
       const currentDir = root.dataset.sortDir || "";
       const nextDir = key === currentKey ? (currentDir === "desc" ? "asc" : "desc") : defaultDir;
 
-      applySortState(key, nextDir);
+      root.dataset.sortKey = key;
+      root.dataset.sortDir = nextDir;
+      updateUI(key, nextDir);
       root.dispatchEvent(new CustomEvent("av-sort", { bubbles: true, detail: { key, dir: nextDir } }));
 
       if (control.tagName === "BUTTON") {
