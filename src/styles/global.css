@@ -1148,18 +1148,16 @@
 }
 
 .av-table__sort--active::after {
-  color: transparent;
-  background: linear-gradient(to bottom, var(--ans-text) 0 50%, var(--ans-muted) 50% 100%);
-  -webkit-background-clip: text;
-  background-clip: text;
+  color: var(--ans-text);
+  content: "▲";
 }
 
 .av-table__sort--asc::after {
-  background: linear-gradient(to bottom, var(--ans-text) 0 50%, var(--ans-muted) 50% 100%);
+  content: "▲";
 }
 
 .av-table__sort--desc::after {
-  background: linear-gradient(to bottom, var(--ans-muted) 0 50%, var(--ans-text) 50% 100%);
+  content: "▼";
 }
 
 .av-table--sticky thead th {
