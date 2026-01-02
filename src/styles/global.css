@@ -1940,6 +1940,43 @@
     background-size: 200% 100%;
   }
 
+  /* Loading overlay utility */
+  .av-loading-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(15, 23, 42, 0.55);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 950;
+  }
+
+  .av-loading-panel {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.85rem 1.1rem;
+    border-radius: 999px;
+    border: 1px solid var(--av-border-subtle);
+    background: var(--av-surface);
+    box-shadow: var(--av-shadow-soft);
+  }
+
+  .av-loading-spinner {
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    border: 2px solid rgba(148, 163, 184, 0.35);
+    border-top-color: var(--av-text);
+    animation: av-spin 0.9s linear infinite;
+  }
+
+  @keyframes av-spin {
+    to {
+      transform: rotate(360deg);
+    }
+  }
+
   /* Accordion */
   .av-accordion {
     border: 1px solid var(--av-border-subtle);

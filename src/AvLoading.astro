@@ -1,0 +1,15 @@
+---
+interface Props {
+  label?: string;
+  className?: string;
+}
+
+const { label = "Loading…", className = "", ...attrs } = Astro.props as Props & Record<string, unknown>;
+---
+
+<div class={`av-loading-overlay ${className}`} role="status" aria-live="polite" {...attrs}>
+  <div class="av-loading-panel">
+    <span class="av-loading-spinner" aria-hidden="true"></span>
+    <p class="av-text-soft av-m-0">{label}</p>
+  </div>
+</div>

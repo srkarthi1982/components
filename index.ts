@@ -11,6 +11,7 @@ export { default as AvFeatureList } from './src/AvFeatureList.astro';
 export { default as AvFooter } from './src/AvFooter.astro';
 export { default as AvIcon } from './src/AvIcon.astro';
 export { default as AvInput } from './src/AvInput.astro';
+export { default as AvLoading } from './src/AvLoading.astro';
 export { default as AvSelect } from './src/AvSelect.astro';
 export { default as AvTextarea } from './src/AvTextarea.astro';
 export { default as AvNavbar } from './src/AvNavbar.astro';
