@@ -1126,6 +1126,37 @@
   white-space: nowrap;
 }
 
+.av-table__sort {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  color: inherit;
+  background: none;
+  border: 0;
+  padding: 0;
+  font: inherit;
+  cursor: pointer;
+}
+
+.av-table__sort::after {
+  content: "";
+  display: inline-block;
+  width: 0;
+  height: 0;
+  border-left: 4px solid transparent;
+  border-right: 4px solid transparent;
+  border-top: 6px solid var(--ans-muted);
+  transform: translateY(1px);
+}
+
+.av-table__sort--active::after {
+  border-top-color: var(--ans-text);
+}
+
+.av-table__sort--asc::after {
+  transform: rotate(180deg);
+}
+
 .av-table--sticky thead th {
   position: sticky;
   top: 0;

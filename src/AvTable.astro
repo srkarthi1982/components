@@ -5,14 +5,90 @@ interface Props {
   dense?: boolean;
   stickyHeader?: boolean;
   scroll?: boolean; // enable x-scroll container
+  sortKey?: string;
+  sortDir?: "asc" | "desc";
 }
 
-const { caption, className = "", dense = false, stickyHeader = false, scroll = true } = Astro.props as Props;
+const {
+  caption,
+  className = "",
+  dense = false,
+  stickyHeader = false,
+  scroll = true,
+  sortKey,
+  sortDir,
+} = Astro.props as Props;
+
+const normalizedSortDir = sortDir === "asc" || sortDir === "desc" ? sortDir : undefined;
 ---
 
-<div class={`av-table ${scroll ? "av-table--scroll" : ""} ${dense ? "av-table--dense" : ""} ${stickyHeader ? "av-table--sticky" : ""} ${className}`}>
+<div
+  class={`av-table ${scroll ? "av-table--scroll" : ""} ${dense ? "av-table--dense" : ""} ${stickyHeader ? "av-table--sticky" : ""} ${className}`}
+  data-sort-key={sortKey}
+  data-sort-dir={normalizedSortDir}
+>
   <table class="av-table__table">
     {caption ? <caption class="av-table__caption">{caption}</caption> : null}
     <slot />
   </table>
 </div>
+
+<script define:vars={{ initialSortKey: sortKey ?? "", initialSortDir: normalizedSortDir ?? "" }}>
+(() => {
+  const root = document.currentScript?.closest(".av-table");
+  if (!root) return;
+
+  const controls = Array.from(root.querySelectorAll("[data-av-sort]"));
+  if (!controls.length) return;
+
+  function applySortState(key, dir) {
+    root.dataset.sortKey = key || "";
+    root.dataset.sortDir = dir || "";
+
+    controls.forEach((control) => {
+      const sortKey = control.getAttribute("data-av-sort") || "";
+      const th = control.closest("th");
+      const isActive = sortKey && sortKey === key;
+
+      if (th) {
+        th.setAttribute(
+          "aria-sort",
+          isActive ? (dir === "desc" ? "descending" : "ascending") : "none"
+        );
+      }
+
+      control.classList.toggle("av-table__sort--active", isActive);
+      control.classList.toggle("av-table__sort--asc", isActive && dir === "asc");
+      control.classList.toggle("av-table__sort--desc", isActive && dir === "desc");
+    });
+  }
+
+  const startKey = root.dataset.sortKey || initialSortKey;
+  const startDir = root.dataset.sortDir || initialSortDir;
+  if (startKey && startDir) {
+    applySortState(startKey, startDir);
+  }
+
+  controls.forEach((control) => {
+    control.addEventListener("click", (event) => {
+      const key = control.getAttribute("data-av-sort") || "";
+      if (!key) return;
+
+      const defaultDir =
+        (control.getAttribute("data-av-sort-default") || "asc").toLowerCase() === "desc"
+          ? "desc"
+          : "asc";
+      const currentKey = root.dataset.sortKey || "";
+      const currentDir = root.dataset.sortDir || "";
+      const nextDir = key === currentKey ? (currentDir === "desc" ? "asc" : "desc") : defaultDir;
+
+      applySortState(key, nextDir);
+      root.dispatchEvent(new CustomEvent("av-sort", { bubbles: true, detail: { key, dir: nextDir } }));
+
+      if (control.tagName === "BUTTON") {
+        event.preventDefault();
+      }
+    });
+  });
+})();
+</script>
