@@ -532,6 +532,17 @@
     font-size: 0.875rem;
   }
 
+  .av-admin-json {
+    background: #0f172a;
+    color: #e2e8f0;
+    padding: 1rem;
+    border-radius: 0.75rem;
+    overflow: auto;
+    font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+    font-size: 0.875rem;
+    line-height: 1.5;
+  }
+
   .av-admin-section > .av-container {
     padding-top: 0;
     padding-bottom: 0;
